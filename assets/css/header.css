@@ -1,0 +1,230 @@
+.circle-bg {
+    overflow: hidden;
+}
+.circle-bg::before {
+    content: '';
+    position: absolute;
+    background-color: #2a5499;
+    width: 900px;
+    height: 750px;
+    border-radius: 70%;
+    top: -380px;
+    right: -380px;
+    z-index: 1;
+}
+.header {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+    padding-left: 2.5rem;
+}
+.logo-header {
+    width: 130px;
+    height: 50px;
+    cursor: pointer;
+    user-select: none;
+} 
+.buttons-header {
+    display: flex;
+    width: auto;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    gap: 50px;
+    right: 40px;
+    z-index: 1;
+}
+.abutton-header-2,
+.abutton-header-1 {
+    color: white;
+    cursor: pointer;
+    font-family: 'Public Sans';
+    font-size: 18px;
+}
+.abutton-header-3 {
+    color: black;
+    cursor: pointer;
+    font-family: 'Public Sans';
+    font-size: 18px;
+}
+.abutton-header-1 {
+    overflow: hidden;
+    cursor: pointer;
+}
+.button-div-header {
+    cursor: pointer;
+}
+.button-div-header-login {
+    cursor: pointer;
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.abutton-header-1:not(:hover)::after {
+    content: "";
+    background: white;
+    width: 0; 
+    height: 5px;
+    border-radius: 15%;
+    position: fixed;
+    cursor: pointer;
+    top: 60px;
+    display: block;
+    animation: slideIn1 0.3s reverse;
+}
+.abutton-header-1:hover::before {
+    content: "";
+    background: white;
+    width: 0; 
+    height: 5px;
+    border-radius: 15%;
+    position: fixed;
+    top: 60px;
+    cursor: pointer;
+    display: block;
+    animation: slideIn1 0.3s forwards;
+}
+@keyframes slideIn1 {
+    from {
+        width: 0;
+    }
+    to {
+        width: 53px;
+    }
+}
+.abutton-header-2 {
+    overflow: hidden;
+}
+.abutton-header-2:not(:hover)::after {
+    content: "";
+    background: white;
+    width: 0; 
+    height: 5px;
+    border-radius: 15%;
+    position: fixed;
+    top: 60px;
+    display: block;
+    animation: slideIn2 0.3s reverse;
+}
+.abutton-header-2:hover::before {
+    content: "";
+    background: white;
+    width: 0; 
+    height: 5px;
+    border-radius: 15%;
+    position: fixed;
+    top: 60px;
+    display: block;
+    animation: slideIn2 0.3s forwards;
+}
+@keyframes slideIn2 {
+    from {
+        width: 0;
+    }
+    to {
+        width: 90px;
+    }
+}
+.abutton-header-3 {
+    overflow: hidden;
+    background-color: white;
+    padding: 11px;
+    border-top-left-radius: 30%;
+    border-bottom-right-radius: 30%;
+    border-bottom-left-radius: 30;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.menu-header {
+    width: 40px;
+    height: 40px;
+    display: none;
+    position: absolute;
+    right: 23px;
+}
+.sidebar {
+    transform: translate(100%); 
+    opacity: 0;
+    background-color: #242d3b;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 50%;
+    bottom: 50%;
+    left: 50%;
+    right: 50%;
+    translate: -50% -50%;  
+    transition: transform 0.3s ease-in-out 0.3s, opacity 0.3s ease-in-out 0.3s;
+}
+.circle-sidebar {
+    overflow: hidden;
+}
+.circle-sidebar::before {
+    content: '';
+    position: absolute;
+    background-color: #2a5499;
+    width: 800px;
+    height: 850px;
+    border-radius: 70%;
+    top: 0;
+    right: -400px;
+    z-index: 1;
+}
+.menu-sidebar {
+    z-index: 1;
+    right: 28px;
+    top: 30px;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+}
+.sidebar-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    position: absolute;
+    top: 35vh;
+    right: 80px;
+    z-index: 1;
+}
+.abutton-sidebar {
+    font-family: 'Public Sans';
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+@media (max-width: 880px) { 
+    .buttons-header {
+        right: 20px;
+    }
+    .circle-bg::before {
+        width: 800px;
+    }
+}
+@media (max-width: 680px) {
+    .buttons-header {
+        display: none;
+    }
+    .menu-header {
+        display: block;
+    }
+    .sidebar.open {
+        transform: translate(0);
+        opacity: 1;
+    }
+    .circle-bg {
+        display: none;
+    }
+}
+@font-face {
+    font-family: 'Public Sans';
+    src: url("../fonts/public-sans.regular.ttf");
+}

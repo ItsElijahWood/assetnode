@@ -1,0 +1,29 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #242d3b;
+    overflow-x: hidden;
+}
+.title-div {
+    padding-left: 2.5rem;
+    padding-top: 2.5rem;
+}
+.title {
+    font-family: 'Public Sans';
+    color: white;
+    font-size: 40px;
+}
+.title-desc {
+    font-family: 'Public Sans';
+    font-size: 20px;
+    color: white;
+}
+@media (max-width: 880px) {
+    .title {
+        font-size: 25px;
+    }
+}
+@font-face {
+    font-family: 'Public Sans';
+    src: url("../fonts/public-sans.regular.ttf");
+}
