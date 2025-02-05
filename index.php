@@ -1,5 +1,5 @@
 <?php 
-    $config = require __DIR__ . '/server/config.php';    
+    $config = require __DIR__ . '/server/config.php';  
 ?>
 <!DOCTYPE html>
 <html lang="en">
