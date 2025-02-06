@@ -206,7 +206,7 @@
         right: 20px;
     }
     .circle-bg::before {
-        width: 800px;
+        width: 830px;
     }
 }
 @media (max-width: 680px) {
