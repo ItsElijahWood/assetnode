@@ -1,0 +1,85 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #242d3b;
+    overflow-x: hidden;
+}
+.title-div {
+    padding-left: 2.5rem;
+}
+.title {
+    font-family: 'Public Sans';
+    color: white;
+    font-size: 40px;
+}
+#signupForm {
+    width: 420px;
+    margin: 200px auto;
+    padding: 30px;
+    border-radius: 8px;
+}
+#signupForm label {
+    display: block;
+    padding-bottom: 20px;
+    font-weight: 600;
+    color: white;
+    font-family: 'Public Sans';
+    font-size: 20px;
+}
+#signupForm input[type="text"] {
+    width: 92%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    background-color: #2a2e35;
+    border: 1px solid #3a3f4b;
+    color: white;
+    font-size: 16px;
+    transition: border 0.3s ease-in-out;
+}
+#signupForm input[type="password"] {
+    width: 92%;
+    padding: 12px 15px;
+    border-radius: 4px;
+    background-color: #2a2e35;
+    border: 1px solid #3a3f4b;
+    color: white;
+    font-size: 16px;
+    transition: border 0.3s ease-in-out;
+}
+#signupForm input[type="text"]:focus,
+#signupForm input[type="password"]:focus {
+    border: 1px solid #4a90e2;
+    outline: none;
+}
+#signupForm input[type="submit"] {
+    width: 30%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    font-size: 17px;
+    cursor: pointer;
+    font-family: 'Public Sans';
+}
+.a-login {
+    color: rgb(111, 219, 249);
+    margin-left: 6.2rem;
+    font-family: 'Public Sans';
+    cursor: pointer;
+}   
+@media (max-width: 480px) {
+    #signupForm {
+        margin: 100px auto;
+        width: 320px;
+    }
+    .a-login {
+        padding-left: 0;
+        margin-left: 1.8rem;
+    }
+}
+@font-face {
+    font-family: 'Public Sans';
+    src: url("../fonts/public-sans.regular.ttf");
+}

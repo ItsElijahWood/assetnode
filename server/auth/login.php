@@ -24,7 +24,7 @@
         echo json_encode(["message" => "Invalid username or password."]);
         exit;
     }
-
+    
     $accounts = mysqli_fetch_assoc($result);
 
     if (!password_verify($password, $accounts['password'])) {

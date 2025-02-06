@@ -6,9 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asset Node Login</title>
+    <title>Asset Node Sign-up</title>
     <link rel="icon" href="./assets/img/favicon.png" type="image/png" />
-    <link rel="stylesheet" href="./assets/css/login.css">
+    <link rel="stylesheet" href="./assets/css/signup.css">
     <link rel="stylesheet" href="./assets/css/header.css">
 </head>
 <body>
@@ -51,31 +51,34 @@
     </div>
     <!-- Main content -->
     <div class="title-div">
-        <h2 class="title">Login</h2>
+        <h2 class="title">Sign Up</h2>
     </div>
-    <!-- Login form (pushes to ajax jquery)-->
-    <form id="loginForm" class="loginForm">
+    <!-- Login form (pushes to ajax jquery) -->
+    <form id="signupForm" class="signupForm">
         <label for="user">Username</label>
         <input type="text" name="user" id="user" required><br><br>
       
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" required><br><br>
-      
-        <input type="submit" value="Login">
-        <a class="a-register" onclick="window.location.href='<?= $config['WEBSITE_URL'] ?>/signup'">Don't have an account?</a>
+        <input type="password" name="password" id="password" minlength="8" required><br><br>
+        
+        <p id="password-strength" class="password-strength"></p>
+
+        <input type="submit" value="Sign Up">
+        <a class="a-login" onclick="window.location.href='<?= $config['WEBSITE_URL'] ?>/login'">Already have an account?</a>
     </form>
     <div id="resMsg"></div>
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
+    <script src="./assets/js/password_strength.js"></script>
     <script>
         // Sends HTML form data to login.php thru POST
         $(document).ready(function () {
-            $("#loginForm").submit(function (event) {
+            $("#signupForm").submit(function (event) {
                 event.preventDefault(); // Reload page disable
 
                 $.ajax({
                     type: "POST",
-                    url: "./server/auth/login.php",
+                    url: "./server/auth/signup.php",
                     data: $(this).serialize(),
                     dataType: "json",
                     success: function (response) {

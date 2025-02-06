@@ -4,9 +4,17 @@ html, body {
   background-color: #242d3b;
   overflow-x: hidden;
 }
+.title-div {
+  padding-left: 2.5rem;
+}
+.title {
+  font-family: 'Public Sans';
+  color: white;
+  font-size: 40px;
+}
 #loginForm {
   width: 420px;
-  margin: 300px auto;
+  margin: 200px auto;
   padding: 30px;
   border-radius: 8px;
 }
@@ -54,7 +62,7 @@ html, body {
 }
 @media (max-width: 480px) {
   #loginForm {
-    margin: 200px auto;
+    margin: 100px auto;
     width: 320px;
   }
   .a-register {
