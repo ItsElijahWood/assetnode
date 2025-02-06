@@ -16,7 +16,7 @@
     <div class="header">
         <div class="circle-bg"></div>
         <a onclick="window.location.href='<?=$config['WEBSITE_URL']?>/'">
-            <img src="./assets/img/Logo.png" class="logo-header">
+            <img src="./assets/img/Logo.png" alt="Header Logo" class="logo-header">
         </a>
         <!-- Buttons -->
         <div class="buttons-header">
@@ -30,11 +30,11 @@
                 <a class="abutton-header-3">Login</a>
             </div>
         </div>
-        <img class="menu-header" src="./assets/img/Menu.svg" onclick="$('.sidebar').addClass('open');">
+        <img class="menu-header" alt="Menu Header Logo Button" src="./assets/img/Menu.svg" onclick="$('.sidebar').addClass('open');">
         <!-- Sidebar -->
         <div id="sidebar" class="sidebar">
             <div class="circle-sidebar"></div>
-            <img class="menu-sidebar" src="./assets/img/Menu.svg" onclick="$('.sidebar').removeClass('open');">
+            <img class="menu-sidebar" alt="Menu Sidebar Logo Button" src="./assets/img/Menu.svg" onclick="$('.sidebar').removeClass('open');">
             <!-- Sidebar buttons -->
             <div class="sidebar-buttons">
                 <div class="sidebar-div-header">
@@ -53,6 +53,9 @@
     <div class="title-div">
         <h2 class="title">Asset Tracking, Made <br>Simple With Asset Node</h2>
         <p class="title-desc">Asset Node is the perfect solution for<br> businesses of all sizes. Our affordable<br> and easy-to-use platform makes<br> asset tracking accessible to everyone.</p>
+    </div>
+    <div class="rodeo">
+        <img class="rodeo-img" alt="Rodeo mascot" src="./assets/img/rodeo.png">
     </div>
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 

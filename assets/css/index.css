@@ -18,6 +18,16 @@ html, body {
     font-size: 20px;
     color: white;
 }
+.rodeo-img {
+    width: 300px;
+    height: 300px;
+    z-index: 1;
+}
+.rodeo {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+}
 @media (max-width: 880px) {
     .title {
         font-size: 25px;

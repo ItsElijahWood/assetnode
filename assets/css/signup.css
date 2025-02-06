@@ -5,7 +5,9 @@ html, body {
     overflow-x: hidden;
 }
 .title-div {
-    padding-left: 2.5rem;
+    position: absolute;
+    left: 43%;
+    top: 17%;
 }
 .title {
     font-family: 'Public Sans';
@@ -69,6 +71,23 @@ html, body {
     font-family: 'Public Sans';
     cursor: pointer;
 }   
+.rodeo-img {
+    width: 300px;
+    height: 300px;
+    z-index: 1;
+}
+.rodeo {
+    position: absolute;
+    bottom: 0;
+    width: 300px;
+    height: 300px;
+    z-index: 1;
+}
+@media (max-width: 780px) {
+    .title-div {
+      top: 20%;
+    }
+}
 @media (max-width: 480px) {
     #signupForm {
         margin: 100px auto;
@@ -77,6 +96,10 @@ html, body {
     .a-login {
         padding-left: 0;
         margin-left: 1.8rem;
+    }
+    .title-div {
+        left: 35%;
+        top: 10%;
     }
 }
 @font-face {

@@ -161,6 +161,7 @@
     right: 50%;
     translate: -50% -50%;  
     transition: transform 0.3s ease-in-out 0.3s, opacity 0.3s ease-in-out 0.3s;
+    z-index: 1;
 }
 .circle-sidebar {
     overflow: hidden;
@@ -206,6 +207,7 @@
         right: 20px;
     }
     .circle-bg::before {
+        height: 700px;
         width: 830px;
     }
 }
