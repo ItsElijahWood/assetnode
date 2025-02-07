@@ -86,16 +86,16 @@ html, body {
   cursor: pointer;
 }
 .rodeo-img {
-  width: 400px;
-  height: 400px;
+  width: 350px;
+  height: 350px;
   z-index: 1;
   user-select: none;
 }
 .rodeo {
   position: absolute;
   bottom: 0;
-  width: 400px;
-  height: 400px;
+  width: 350px;
+  height: 350px;
   z-index: 1;
 }
 #resMsg {
@@ -122,15 +122,6 @@ html, body {
   .a-register {
     padding-left: 0;
     left: 70px;
-  }
-  .rodeo-img {
-    width: 300px;
-    height: 300px;
-    z-index: 1;
-  }
-  .rodeo {
-    width: 300px;
-    height: 300px;
   }
   .togglePassword-div {
     right: -18px;
