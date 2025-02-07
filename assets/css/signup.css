@@ -59,6 +59,7 @@ html, body {
     border-color: #3a3f4b;
     padding: 11.3px 10px;
     position: absolute; 
+    cursor: pointer;
     right: -10px; 
     top: 35.93%; 
     transform: translateY(-50%);   

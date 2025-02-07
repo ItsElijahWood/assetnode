@@ -58,7 +58,7 @@
         <label for="password">Password</label>
         <div class="password-div">
             <input type="password" name="password" id="password" minlength="8" required>
-            <div class="togglePassword-div">
+            <div class="togglePassword-div" id="togglePassword-div">
                 <span id="togglePassword">👁️</span>
             </div>
         </div>

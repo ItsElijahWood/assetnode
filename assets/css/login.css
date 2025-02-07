@@ -57,6 +57,7 @@ html, body {
 .togglePassword-div {
   background-color: #2a2e35;
   border: 1px solid;
+  cursor: pointer;
   border-color: #3a3f4b;
   padding: 11.3px 10px;
   position: absolute; 
