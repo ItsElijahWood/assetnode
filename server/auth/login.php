@@ -5,6 +5,8 @@
     $user = $_POST['user'] ?? null;
     $password = $_POST['password'] ?? null;
 
+    session_start();
+
     if (!$user || !$password) {
         echo json_encode(["message" => "Username and password are required."]);
         exit;
@@ -16,6 +18,7 @@
         exit;
     }
     
+    // Bind paramater to database to return result
     mysqli_stmt_bind_param($stmt, "s", $user);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
@@ -31,6 +34,11 @@
         echo json_encode(["message" => "Invalid username or password."]);
         exit;
     }
+
+    // Generate session id and put database info into session globar var
+    session_regenerate_id();
+    // Fetches more info at session.php
+    $_SESSION["user_id"] = $accounts["id"];
 
     echo json_encode(["message" => "Login successful"]);
 ?>

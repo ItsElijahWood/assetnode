@@ -64,8 +64,8 @@
         </div>
         <input type="submit" value="Login">
         <a class="a-register" onclick="window.location.href='<?= $config['WEBSITE_URL'] ?>/signup'">Don't have an account?</a>
+        <div id="resMsg"></div>
     </form>
-    <div id="resMsg"></div>
     <div class="rodeo">
         <img class="rodeo-img" alt="Rodeo mascot" src="./assets/img/rodeo.png">
     </div>
@@ -83,9 +83,6 @@
                     url: "./server/auth/login.php",
                     data: $(this).serialize(),
                     dataType: "json",
-                    success: function (response) {
-                        $("#resMsg").html(response.message);
-                    },
                     error: function () {
                         $("#resMsg").html("Error processing request.");
                     }

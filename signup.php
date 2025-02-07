@@ -65,8 +65,8 @@
         <div class="password-strength" id="password-strength"></div>
         <input type="submit" value="Login">
         <a class="a-login" onclick="window.location.href='<?= $config['WEBSITE_URL'] ?>/login'">Already have an account?</a>
+        <div id="resMsg"></div>
     </form>
-    <div id="resMsg"></div>
     <div class="rodeo">
         <img class="rodeo-img" alt="Rodeo mascot" src="./assets/img/rodeo.png">
     </div>
