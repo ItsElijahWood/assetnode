@@ -3,7 +3,8 @@ $(document).ready(function () {
         "font-family": "Public Sans", 
         "font-size": "18px",
         "color": "white",
-        "font-weight": "600"
+        "font-weight": "600",
+        "padding-bottom": "20px"
     });
     $('#password').on('input', function () {
         const password = $('#password').val(); 

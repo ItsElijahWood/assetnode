@@ -50,21 +50,21 @@
         </div>
     </div>
     <!-- Main content -->
-    <div class="title-div">
-        <h2 class="title">Sign Up</h2>
-    </div>
     <!-- Login form (pushes to ajax jquery) -->
-    <form id="signupForm" class="signupForm">
+    <form id="signupForm" class="loginForm">
+        <h2 class="title">Sign Up</h2>
         <label for="user">Username</label>
-        <input type="text" name="user" id="user" required><br><br>
-      
+        <input type="text" name="user" id="user" required><br><br>   
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" minlength="8" required><br><br>
-        
-        <p id="password-strength" class="password-strength"></p>
-
-        <input type="submit" value="Sign Up">
-        <a class="a-login" onclick="window.location.href='<?= $config['WEBSITE_URL'] ?>/login'">Already have an account?</a>
+        <div class="password-div">
+            <input type="password" name="password" id="password" minlength="8" required>
+            <div class="togglePassword-div">
+                <span id="togglePassword">👁️</span>
+            </div>
+        </div>
+        <div class="password-strength" id="password-strength"></div>
+        <input type="submit" value="Login">
+        <a class="a-login" onclick="window.location.href='<?= $config['WEBSITE_URL'] ?>/signup'">Don't have an account?</a>
     </form>
     <div id="resMsg"></div>
     <div class="rodeo">
@@ -72,6 +72,7 @@
     </div>
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
+    <script src="./assets/js/toggle_password.js"></script>
     <script src="./assets/js/password_strength.js"></script>
     <script>
         // Sends HTML form data to login.php thru POST
