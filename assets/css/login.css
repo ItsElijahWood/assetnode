@@ -23,7 +23,16 @@ html, body {
   font-family: 'Public Sans';
   font-size: 20px;
 }
-#loginForm input[type="text"],
+#loginForm input[type="text"] {
+  width: 100%;
+  padding: 12px 19px;
+  background-color: #2a2e35;
+  border: 1px solid #3a3f4b;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 15px;
+  transition: border 0.3s ease-in-out;
+}
 #loginForm input[type="password"] {
   width: 92%;
   padding: 12px 15px;
@@ -38,7 +47,6 @@ html, body {
 #loginForm input[type="password"]:focus {
   border: 1px solid #4a90e2;
   outline: none;
-  padding-right: 30px;
 }
 .password-div {
   width: 100%;
@@ -50,9 +58,9 @@ html, body {
   background-color: #2a2e35;
   border: 1px solid;
   border-color: #3a3f4b;
-  padding: 11px 10px;
+  padding: 11.3px 10px;
   position: absolute; 
-  left: -42px; 
+  right: -40px; 
   top: 36%; 
   transform: translateY(-50%);   
 }
@@ -72,32 +80,23 @@ html, body {
 }
 .a-register {
   color: rgb(111, 219, 249);
-  margin-left: 7.4rem;
+  position: relative;
+  left: 160px;
   font-family: 'Public Sans';
   cursor: pointer;
 }
 .rodeo-img {
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
   z-index: 1;
   user-select: none;
 }
 .rodeo {
   position: absolute;
   bottom: 0;
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
   z-index: 1;
-}
-@media (max-width: 880px) {
-  .rodeo {
-    width: 400px;
-    height: 400px;
-  }
-  .rodeo-img {
-    width: 330px;
-    height: 330px;
-  }
 }
 @media (max-width: 800px) {
   .rodeo-img {
@@ -116,7 +115,7 @@ html, body {
   }
   .a-register {
     padding-left: 0;
-    margin-left: 3rem;
+    left: 70px;
   }
   .rodeo-img {
     width: 300px;
@@ -126,6 +125,21 @@ html, body {
   .rodeo {
     width: 300px;
     height: 300px;
+  }
+  .togglePassword-div {
+    right: -18px;
+  }
+  #loginForm input[type="text"] {
+    padding-right: 0;
+    width: 99%;
+  }
+  #loginForm input[type="password"] {
+    padding: 12px 0;
+}
+}
+@media (max-width: 400px) {
+  .rodeo {
+    display: none;
   }
 }
 @font-face {

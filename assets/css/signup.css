@@ -24,30 +24,47 @@ html, body {
     font-size: 20px;
 }
 #signupForm input[type="text"] {
-  width: 92%;
-  padding: 12px 15px;
-  background-color: #2a2e35;
-  border: 1px solid #3a3f4b;
-  color: white;
-  font-size: 16px;
-  margin-bottom: 15px;
-  transition: border 0.3s ease-in-out;
+    width: 95%;
+    padding: 12px 15px;
+    background-color: #2a2e35;
+    border: 1px solid #3a3f4b;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 15px;
+    transition: border 0.3s ease-in-out;
 }
 #signupForm input[type="password"] {
-  width: 92%;
-  padding: 12px 15px;
-  background-color: #2a2e35;
-  border: 1px solid #3a3f4b;
-  color: white;
-  font-size: 16px;
-  margin-bottom: 15px;
-  transition: border 0.3s ease-in-out;
+    width: 92%;
+    padding: 12px 0;
+    background-color: #2a2e35;
+    border: 1px solid #3a3f4b;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 15px;
+    transition: border 0.3s ease-in-out;
 }
 #signupForm input[type="text"]:focus,
 #signupForm input[type="password"]:focus {
-  border: 1px solid #4a90e2;
-  outline: none;
-  padding-right: 30px;
+    border: 1px solid #4a90e2;
+    outline: none;
+}
+.password-div {
+    width: 100%;
+    position: relative; 
+    display: inline-block;
+}
+.togglePassword-div {
+    background-color: #2a2e35;
+    border: 1px solid;
+    border-color: #3a3f4b;
+    padding: 11.3px 10px;
+    position: absolute; 
+    right: -10px; 
+    top: 36%; 
+    transform: translateY(-50%);   
+}
+#togglePassword { 
+    cursor: pointer;
 }
 #signupForm input[type="submit"] {
     width: 30%;
@@ -60,52 +77,25 @@ html, body {
     cursor: pointer;
     font-family: 'Public Sans';
 }
-.password-div {
-    width: 100%;
-    position: relative; 
-    display: inline-block;
-}
-.togglePassword-div {
-    background-color: #2a2e35;
-    border: 1px solid;
-    border-color: #3a3f4b;
-    padding: 11px 10px;
-    position: absolute; 
-    left: -42px; 
-    top: 36%; 
-    transform: translateY(-50%);   
-}
-#togglePassword { 
-    cursor: pointer;
-}
 .a-login {
     color: rgb(111, 219, 249);
-    margin-left: 6.2rem;
     font-family: 'Public Sans';
+    position: relative;
+    left: 110px;
     cursor: pointer;
 }   
 .rodeo-img {
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
     z-index: 1;
     user-select: none;
 }
 .rodeo {
     position: absolute;
     bottom: 0;
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
     z-index: 1;
-}
-@media (max-width: 880px) {
-    .rodeo {
-      width: 400px;
-      height: 400px;
-    }
-    .rodeo-img {
-      width: 330px;
-      height: 330px;
-    }
 }
 @media (max-width: 800px) {
     .rodeo-img {
@@ -122,10 +112,6 @@ html, body {
         margin: 0px auto;
         width: 320px;
     }
-    .a-login {
-        padding-left: 0;
-        margin-left: 1.8rem;
-    }
     .rodeo-img {
         width: 300px;
         height: 300px;
@@ -134,6 +120,21 @@ html, body {
     .rodeo {
         width: 300px;
         height: 300px;
+    }
+    .a-login {
+        left: 50px;
+    }
+    .togglePassword-div {
+        right: -18px;
+    }
+    #signupForm input[type="text"] {
+        padding-right: 0;
+        width: 100%;
+    }
+}
+@media (max-width: 400px) {
+    .rodeo {
+      display: none;
     }
 }
 @font-face {
