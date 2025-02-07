@@ -64,7 +64,7 @@
         </div>
         <div class="password-strength" id="password-strength"></div>
         <input type="submit" value="Login">
-        <a class="a-login" onclick="window.location.href='<?= $config['WEBSITE_URL'] ?>/signup'">Don't have an account?</a>
+        <a class="a-login" onclick="window.location.href='<?= $config['WEBSITE_URL'] ?>/login'">Already have an account?</a>
     </form>
     <div id="resMsg"></div>
     <div class="rodeo">
