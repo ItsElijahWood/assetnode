@@ -46,7 +46,7 @@ class Login
     }
 }
 
-require __DIR__ . '/../database/database.php';
+require __DIR__ . '/../core/database.php';
 
 // Waits for html post
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -1,8 +1,6 @@
 <?php
 namespace Server\Auth;
 
-require_once __DIR__ . '/../database/database.php';
-
 class Signup
 {
     private $conn;
@@ -36,6 +34,8 @@ class Signup
         return ["success" => true, "message" => "Signup successful"];
     }
 }
+
+require_once __DIR__ . '/../core/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $signup = new Signup($conn);
