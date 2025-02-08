@@ -1,0 +1,17 @@
+{
+    "name": "itselijahwood/assetnode",
+    "description": "Asset Node is a powerful asset management tool designed to help you keep track of what you own, buy, lease, and loan.",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Itselijahwood\\Assetnode\\": "server/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Elijah Wood"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}

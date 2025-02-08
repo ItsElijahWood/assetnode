@@ -1,5 +1,5 @@
 <?php
-    $config = require __DIR__ . '/server/config.php';
+$config = require __DIR__ . '/server/config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +15,7 @@
     <!-- Header -->
     <div class="circle-bg"></div>
     <div class="header">
-        <a onclick="window.location.href='<?=$config['WEBSITE_URL']?>/'">
+        <a onclick="window.location.href='<?= $config['WEBSITE_URL'] ?>/'">
             <img src="./assets/img/Logo.png" alt="Header Logo" class="logo-header">
         </a>
         <!-- Buttons -->
@@ -26,7 +26,7 @@
             <div class="button-div-header">
                 <a class="abutton-header-2">Contact us</a>
             </div>
-            <div class="button-div-header-login" onclick="window.location.href='<?=$config['WEBSITE_URL']?>/login'">
+            <div class="button-div-header-login" onclick="window.location.href='<?= $config['WEBSITE_URL'] ?>/login'">
                 <a class="abutton-header-3">Login</a>
             </div>
         </div>
@@ -44,7 +44,7 @@
                     <a class="abutton-sidebar">Contact us</a>
                 </div>
                 <div class="sidebar-div-header">
-                    <a class="abutton-sidebar" onclick="window.location.href='<?=$config['WEBSITE_URL']?>/login'">Login</a>
+                    <a class="abutton-sidebar" onclick="window.location.href='<?= $config['WEBSITE_URL'] ?>/login'">Login</a>
                 </div>
             </div>
         </div>
