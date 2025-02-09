@@ -63,7 +63,7 @@ $config = require __DIR__ . '/server/config.php';
             </div>
         </div>
         <div class="password-strength" id="password-strength"></div>
-        <input type="submit" value="Login">
+        <input type="submit" value="Sign up">
         <a class="a-login" onclick="window.location.href='<?= $config['WEBSITE_URL'] ?>/login'">Already have an account?</a>
         <div id="resMsg"></div>
     </form>
