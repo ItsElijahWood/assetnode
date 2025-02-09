@@ -11,7 +11,7 @@ services:
       - "444:443"
     depends_on:
       - mysql
-    command: ["/bin/bash", "-c", "apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev && docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install mysqli pdo pdo_mysql && a2enmod rewrite && apache2-foreground"]
+    command: ["/bin/bash", "-c", "echo 'deb http://deb.debian.org/debian bookworm main' > /etc/apt/sources.list && apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev && docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install mysqli pdo pdo_mysql gd && a2enmod rewrite && apache2-foreground"]
 
   mysql:
     image: mysql:8.0

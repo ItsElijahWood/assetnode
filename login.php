@@ -85,6 +85,7 @@ $config = require __DIR__ . '/server/config.php';
                     dataType: "json",
                     success: function (response) {
                         $("#resMsg").html(response.message);
+                        window.location.href="/home";
                     },
                     error: function (response) {
                         $("#resMsg").html(response.message);
