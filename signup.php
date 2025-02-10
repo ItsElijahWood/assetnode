@@ -53,8 +53,10 @@ $config = require __DIR__ . '/server/config.php';
     <!-- Login form (pushes to ajax jquery) -->
     <form id="signupForm" class="loginForm">
         <h2 class="title">Sign Up</h2>
-        <label for="user">Username</label>
-        <input type="text" name="user" id="user" required><br><br>   
+        <label for="user">Name</label>
+        <input type="text" name="user" id="user" required><br><br>
+        <label for="text">Email</label>
+        <input type="email" name="email" id="email" required><br><br>   
         <label for="password">Password</label>
         <div class="password-div">
             <input type="password" name="password" id="password" minlength="8" required>
@@ -67,9 +69,6 @@ $config = require __DIR__ . '/server/config.php';
         <a class="a-login" onclick="window.location.href='<?= $config['WEBSITE_URL'] ?>/login'">Already have an account?</a>
         <div id="resMsg"></div>
     </form>
-    <div class="rodeo">
-        <img class="rodeo-img" alt="Rodeo mascot" src="./assets/img/rodeo.png">
-    </div>
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
     <script src="./assets/js/toggle_password.js"></script>

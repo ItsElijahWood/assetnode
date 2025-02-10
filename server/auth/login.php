@@ -11,38 +11,38 @@ class Login
         $this->conn = $conn;
     }
 
-    public function authenticate($user, $password)
+    public function authenticate($email, $password)
     {
         header("Content-Type: application/json");
         session_start();
 
-        if (!$user || !$password) {
-            return ["success" => false, "message" => "Username and password are required."];
+        if (!$email || !$password) {
+            return ["failed" => true, "message" => "Email and password are required."];
         }
 
-        $stmt = mysqli_prepare($this->conn, "SELECT * FROM accounts WHERE username = ?");
+        $stmt = mysqli_prepare($this->conn, "SELECT * FROM accounts WHERE email = ?");
         if (!$stmt) {
-            return ["success" => false, "message" => "Database query error."];
+            return ["failed" => true, "message" => "Database query error."];
         }
 
-        mysqli_stmt_bind_param($stmt, "s", $user);
+        mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
 
         if (mysqli_num_rows($result) === 0) {
-            return ["success" => false, "message" => "Invalid username or password."];
+            return ["failed" => true, "message" => "Account not found."];
         }
 
         $accounts = mysqli_fetch_assoc($result);
 
         if (!password_verify($password, $accounts['password'])) {
-            return ["success" => false, "message" => "Invalid username or password."];
+            return ["failed" => true, "message" => "Invalid Email or password."];
         }
 
         session_regenerate_id();
         $_SESSION["user_id"] = $accounts["id"];
 
-        return ["success" => true, "message" => "Login successful"];
+        return ["failed" => false, "message" => "Login successful"];
     }
 }
 
@@ -52,14 +52,14 @@ require __DIR__ . '/../core/database.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $login = new Login($conn);
 
-    $username = trim($_POST['user'] ?? '');
+    $email = trim($_POST['email'] ?? '');
     $password = trim($_POST['password'] ?? '');
 
-    if (empty($username) || empty($password)) {
-        echo json_encode(['success' => false, 'message' => "Username and password are required."]);
+    if (empty($email) || empty($password)) {
+        echo json_encode(['failed' => true, 'message' => "Email and password are required."]);
         exit;
     }
 
-    $response = $login->authenticate($username, $password);
+    $response = $login->authenticate($email, $password);
     echo json_encode($response);
 }

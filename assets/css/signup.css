@@ -11,7 +11,7 @@ html, body {
 }
 #signupForm {
     width: 420px;
-    margin: 200px auto;
+    margin: 100px auto;
     padding: 30px;
     border-radius: 8px;
 }
@@ -23,6 +23,7 @@ html, body {
     font-family: 'Public Sans';
     font-size: 20px;
 }
+#signupForm input[type="email"],
 #signupForm input[type="text"] {
     width: 95%;
     padding: 12px 15px;
@@ -85,34 +86,11 @@ html, body {
     left: 110px;
     cursor: pointer;
 }   
-.rodeo-img {
-    width: 350px;
-    height: 350px;
-    z-index: 1;
-    user-select: none;
-}
-.rodeo {
-    position: absolute;
-    bottom: 0;
-    width: 350px;
-    height: 350px;
-    z-index: 1;
-}
 #resMsg {
     color: white;
     font-family: 'Public Sans';
     font-size: 19px;
     padding-top: 15px;
-}
-@media (max-width: 800px) {
-    .rodeo-img {
-        width: 300px;
-        height: 300px;
-    }
-    .rodeo {
-        width: 300px;
-        height: 300px;
-    }
 }
 @media (max-width: 480px) {
     #signupForm {
@@ -128,11 +106,6 @@ html, body {
     #signupForm input[type="text"] {
         padding-right: 0;
         width: 100%;
-    }
-}
-@media (max-width: 400px) {
-    .rodeo {
-      display: none;
     }
 }
 @font-face {

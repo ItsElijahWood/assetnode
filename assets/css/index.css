@@ -41,8 +41,8 @@ html, body {
 }
 @media (max-width: 400px) {
     .rodeo {
-      width: 300px;
-      height: 300px;
+        width: 300px;
+        height: 300px;
     }
     .rodeo-img {
         width: 300px;
