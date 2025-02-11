@@ -98,7 +98,7 @@ class Signup
 }
 
 require_once __DIR__ . '/../core/database.php';
-require_once __DIR__ . '/../core/db/database_assets.php';
+require_once __DIR__ . '/../core/db/database_static.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $signup = new Signup($conn, $connAssets);

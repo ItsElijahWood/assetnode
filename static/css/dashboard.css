@@ -1,6 +1,7 @@
-body {
+html, body {
   margin: 0;
   background-color: #242d3b;
+  overflow-x: hidden;
 }
 .pay-message {
   width: 300px;
@@ -23,12 +24,13 @@ body {
   width: 310px;
   height: 210px;
   padding: 10px;
-  background: linear-gradient(45deg, #407de0, #021f4e, #407de0);
+  background: linear-gradient(45deg, #407de0, #033482, #407de0);
   background-size: 400% 400%;
   position: absolute;
   z-index: -1;
   right: -5px;
   bottom: -5px;
+  border: 1px solid white;
   animation: colorMove 10s ease-in-out infinite;
   border-radius: 5px;
 }
@@ -36,6 +38,7 @@ body {
   width: 300px;
   height: 200px;
   position: absolute;
+  content: none;
   bottom: 0;
   right: 0;
   padding: 10px;
@@ -84,12 +87,13 @@ body {
 }
 .pay-pricing {
   font-family: 'Public Sans';
-  background-color: #242d3b;
+  background-color: #ffffff;
   padding: 10px;
   padding-left: 30px;
   padding-right: 30px;
-  color: white;
-  border-radius: 5px;
+  border-bottom-right-radius: 30%;
+  border-top-left-radius: 30%;
+  color: black;
   cursor: pointer;
 }
 @font-face {

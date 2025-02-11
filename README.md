@@ -9,7 +9,7 @@ This project is built using:
 - **Frontend:** jQuery  
 - **Backend:** PHP  
 - **Database:** MySQL  
-- **Routing:** Apache `.htaccess` (for clean URLs)  
+- **Host:** Apache
 
 ## 🔒 License  
 

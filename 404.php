@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 Not Found</title>
-  <link rel="icon" href="./assets/img/favicon.png" type="image/png" />
+  <link rel="icon" href="./static/img/favicon.png" type="image/png" />
 </head>
 <body>
   <style>
@@ -37,7 +37,7 @@
     }
   </style>
   <div class="fourofour">
-    <img src="./assets/img/sub_icon.png" class="icon">
+    <img src="./static/img/sub_icon.png" class="icon">
     <h1>404 - Page Not Found</h1>
     <p>You are not authorized to view this page.</p>
   </div>

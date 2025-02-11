@@ -1,15 +1,13 @@
 # Enable mod_rewrite
 RewriteEngine On
 
-# Rewrite URLs with .php to remove the .php extension
-RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [L]
-
-# Try to find the file without the .php extension if the file is not specified
+# Ensure the request is not already a file or directory
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [L]
 
-# Ensure directories and existing files are not affected
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ /index.php [L]
+# Check if a PHP file exists in either location
+RewriteCond %{DOCUMENT_ROOT}/$1.php -f [OR]
+RewriteCond %{DOCUMENT_ROOT}/assets/$1.php -f
+
+# Rewrite URLs to remove the .php extension
+RewriteRule ^(.+)$ $1.php [L]

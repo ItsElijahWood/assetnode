@@ -3,9 +3,10 @@
 ## Prerequisites  
 Before setting up Asset Node, ensure you have the following installed:  
 
-- **PHP** (Required for running the project)  
+- **Docker** (Required for running Apache, MySQL, and phpMyAdmin locally)  
+- **Docker Compose** (For managing multi-container applications)  
+- **PHP** (For running the project)  
 - **Composer** (Dependency manager for PHP)  
-- **LAMP/XAMPP** (For running the project on a local server)  
 
 > ⚠ **Note:** The `config.php` file is not included in this repository as it contains tokens. The developer will provide this file separately.  
 
@@ -13,50 +14,65 @@ Before setting up Asset Node, ensure you have the following installed:
 
 ## 🛠 Installation  
 
-### 1️⃣ Update and Install Dependencies (Linux)  
-Run the following command to install PHP and Composer:  
+### 1️⃣ Install Docker and Docker Compose (Linux)  
+Run the following command to install Docker and Docker Compose:  
 ```bash
-sudo apt update && sudo apt install php composer -y
-```  
+sudo apt update && sudo apt install docker.io docker-compose -y
+```
+Ensure Docker is running:  
+```bash
+sudo systemctl start docker
+sudo systemctl enable docker
+```
 
-### 2️⃣ Install Dependencies  
+### 2️⃣ Install PHP and Composer  
+Run the following command:  
+```bash
+sudo apt install php composer -y
+```
+
+### 3️⃣ Install Dependencies  
 Navigate to the project directory and run:  
 ```bash
 composer install
-```  
+```
 This will install all required dependencies specified in `composer.json`.  
-
----
-
-## 📂 Project Setup  
-
-Ensure that the **Asset Node** directory is inside the `htdocs` folder:  
-
-- **Linux (LAMP Stack):** `/opt/lamp/htdocs/assetnode`  
-- **Windows (XAMPP):** `C:\xampp\htdocs\assetnode`  
-
-You may need to restart your local server after placing the project in the correct directory.  
 
 ---
 
 ## 🚀 Running the Project  
 
-1. Start your local server (LAMP/XAMPP).  
-2. Open a browser and navigate to:  
+1. Navigate to the project root and run:
+   ```bash
+   docker-compose up -d
    ```
-   http://localhost/assetnode
+   This starts Apache, MySQL, and phpMyAdmin in Docker containers.
+
+2. Open a browser and navigate to:
    ```
-3. The project should now be accessible.  
+   http://localhost:80
+   ```
+   The project should now be accessible.
+
+3. Access phpMyAdmin at:
+   ```
+   http://localhost:8080
+   ```
+   Use the MySQL credentials defined in `docker-compose.yml`.
 
 ---
 
 ## 🎯 Additional Notes  
 - Ensure `config.php` is placed in the project root before running the application.  
-- If you encounter any issues, check PHP and Composer installations using:  
+- Check the running Docker containers with:  
   ```bash
-  php -v
-  composer -V
+  docker ps
   ```  
-- For Windows users, run XAMPP as an administrator to avoid permission issues.  
-
+- Stop the project when not in use:
+  ```bash
+  docker-compose down
+  ```  
 ---
+
+## Production
+- In production, this project is configured for XAMPP, while Docker is used only for local development.
