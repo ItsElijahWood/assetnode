@@ -30,8 +30,9 @@ class Signup
 
         $uid_string = "uid_" . $row['id'];
         $sql = "
-            CREATE TABLE IF NOT EXISTS `$uid_string` (
+            CREATE TABLE IF NOT EXISTS `$uid_string` (     
                 type VARCHAR(200) NOT NULL,
+                asset_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                 asset_type VARCHAR(200) NOT NULL,
                 make VARCHAR(200) NOT NULL,
                 serial_number VARCHAR(200) NOT NULL,
@@ -53,6 +54,55 @@ class Signup
             return ["success" => false, "message" => "Failed to execute database query"];
         }
     }
+
+    public function createAssetPreset($email) {
+        if (!$email) {
+            return ["success" => false, "message" => "All fields are required."];
+        }
+    
+        $stmt = mysqli_prepare($this->conn, "SELECT id FROM accounts WHERE email = ?");
+        mysqli_stmt_bind_param($stmt, "s", $email);
+    
+        if (!mysqli_stmt_execute($stmt)) {
+            return ["success" => false, "message" => "Error executing database query."];
+        }
+    
+        $result = mysqli_stmt_get_result($stmt);
+        $row = mysqli_fetch_assoc($result);
+    
+        if (!$row) {
+            return ["success" => false, "message" => "User not found."];
+        }
+    
+        $uid_string = "uid_" . intval($row['id']) . "_preset";
+    
+        $sqlCreateTable = "CREATE TABLE `$uid_string` (
+            asset_type VARCHAR(255) DEFAULT NULL,
+            ram INT(255) DEFAULT NULL,
+            operating_system VARCHAR(255) DEFAULT NULL,
+            make VARCHAR(255) DEFAULT NULL
+        )";
+    
+        if (!mysqli_query($this->connAssets, $sqlCreateTable)) {
+            return ["success" => false, "message" => "Failed to create asset preset table."];
+        }
+    
+        // Insert default values into the assets table
+        $sqlInsertAssets = "INSERT INTO `$uid_string` (asset_type, ram, operating_system, make) VALUES
+            ('Laptop', '2', 'Windows', 'Asus'),
+            ('Desktop', '4', 'Linux', 'Apple'),
+            ('Tablet', '6', 'OS X', 'Acer'),
+            ('Phone', '8', 'iOS', 'Epson'),
+            ('Server', '16', 'Android', 'Fujitsu'),
+            ('Projector', '32', 'ChromeOS', 'Google'),
+            ('Switch', '64', '', 'HP')";
+    
+        if (!mysqli_query($this->connAssets, $sqlInsertAssets)) {
+            return ["success" => false, "message" => "Failed to insert default assets."];
+        }
+    
+        return ["success" => true, "message" => "Asset preset created successfully."];
+    }    
 
     public function register($user, $email, $password)
     {
@@ -98,7 +148,7 @@ class Signup
 }
 
 require_once __DIR__ . '/../core/database.php';
-require_once __DIR__ . '/../core/db/database_static.php';
+require_once __DIR__ . '/../core/db/database_assets.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $signup = new Signup($conn, $connAssets);
@@ -114,6 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $response = $signup->register($username, $email, $password);
     $signup->createAssetDatabase($email);
+    $signup->createAssetPreset($email);
 
     echo json_encode($response);
 }

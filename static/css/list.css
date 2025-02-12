@@ -4,3 +4,280 @@ html, body {
   background-color: #242d3b;
   overflow-x: hidden;
 }
+option {
+  font-size: 17px;
+}
+.add {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999; 
+  width: 700px;
+  height: 500px;
+  background-color: #415677;
+  border: 2px solid #fff;
+}
+.add-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 526px;
+}
+.add-header-x {
+  cursor: pointer;
+}
+.add-header-x,
+.add-header-title {
+  font-family: 'Public Sans';
+  color: #fff;
+  font-size: 25px;
+  font-weight: 600;
+  margin: 0;
+  margin-top: 10px;
+}
+.a-new {
+  font-family: 'Public Sans';
+  cursor: pointer;
+  color: #fff;
+  font-size: 19px;
+}
+.hardware-inputs-div {
+  display: none;
+  flex-wrap: wrap;
+  padding-left: 1rem;
+  padding-top: 2rem;
+  height: auto;
+  max-width: 100%;
+  gap: 30px;
+}
+.select-div,
+.input-div {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  gap: 10px;
+  height: auto;
+}
+.type-selector {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-left: 0.8rem;
+  display: flex;
+  gap: 20px;
+}
+.type-selector-a-4,
+.type-selector-a-3,
+.type-selector-a-2,
+.type-selector-a-1 {
+  font-family: 'Public Sans';
+  color: #ffffff;
+  font-size: 18px;
+}
+.type-selector-a-2:not(:hover)::after,
+.type-selector-a-1:not(:hover)::after {
+  content: "";
+  background: white;
+  width: 0 !important; 
+  height: 5px;
+  border-radius: 0% !important;
+  position: fixed;
+  cursor: pointer;
+  top: 85px;
+  display: block;
+  animation: slideIn1 0.3s reverse;
+}
+.type-selector-a-2.active::before,
+.type-selector-a-1.active::before {
+  content: "";
+  background: white;
+  width: 100px; 
+  height: 5px;
+  border-radius: 15%;
+  position: fixed;
+  top: 85px;
+  cursor: pointer;
+  display: block;
+}
+.type-selector-a-2:hover::before,
+.type-selector-a-1:hover::before {
+  content: "";
+  background: white;
+  width: 0; 
+  height: 5px;
+  position: fixed;
+  top: 85px;
+  cursor: pointer;
+  display: block;
+  animation: slideIn1 0.3s forwards;
+}
+@keyframes slideIn1 {
+  from {
+      width: 0;
+  }
+  to {
+      width: 100px;
+  }
+}
+.type-selector-a-3:not(:hover)::after {
+  content: "";
+  background: white;
+  width: 0 !important; 
+  height: 5px;
+  border-radius: 0 !important;
+  position: fixed;
+  cursor: pointer;
+  top: 85px;
+  display: block;
+  animation: slideIn2 0.3s reverse;
+}
+.type-selector-a-3.active::before {
+  content: "";
+  background: white;
+  width: 50px; 
+  height: 5px;
+  position: fixed;
+  top: 85px;
+  border-radius: 15%;
+  cursor: pointer;
+  display: block;
+}
+.type-selector-a-3:hover::before {
+  content: "";
+  background: white;
+  width: 0; 
+  height: 5px;
+  position: fixed;
+  top: 85px;
+  cursor: pointer;
+  display: block;
+  animation: slideIn2 0.3s forwards;
+}
+@keyframes slideIn2 {
+  from {
+      width: 0;
+  }
+  to {
+      width: 47px;
+  }
+}
+.type-selector-a-4:not(:hover)::after {
+  content: "";
+  background: white;
+  width: 0 !important; 
+  height: 5px;
+  border-radius: 0 !important;
+  position: fixed;
+  cursor: pointer;
+  top: 85px;
+  display: block;
+  animation: slideIn3 0.3s reverse;
+}
+.type-selector-a-4.active::before {
+  content: "";
+  background: white;
+  width: 40px; 
+  height: 5px;
+  border-radius: 15%;
+  position: fixed;
+  top: 85px;
+  cursor: pointer;
+  display: block;
+}
+.type-selector-a-4:hover::before {
+  content: "";
+  background: white;
+  width: 0; 
+  height: 5px;
+  position: fixed;
+  top: 85px;
+  cursor: pointer;
+  display: block;
+  animation: slideIn3 0.3s forwards;
+}
+@keyframes slideIn3 {
+  from {
+      width: 0;
+  }
+  to {
+      width: 40px;
+  }
+}
+#asset-id,
+#asset-type {
+  color: #ffffff;
+  font-family: 'Public Sans';
+}
+#asset_id-input {
+  color: #ffffff;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  padding: 8px;
+  font-size: 17px;
+}
+#asset_id-input {
+  outline: none;
+}
+#AssetType {
+  color: #ffffff;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  padding: 8px;
+  outline: none;
+  font-family: 'Public Sans';
+  font-size: 15px;
+}
+.asset-type-option {
+  color: #ffffff;
+  font-size: 17px;
+  font-family: 'Public Sans';
+}
+.ram-p {
+  position: absolute;
+  top: 30%;
+  left: 73%;
+  color: #ffffff;
+}
+@media (max-width: 900px) {
+  .add {
+    width: 700px;
+  }
+  .add-header {
+    gap: 520px;
+  }
+  .ram-p {
+    top: 30.1%;
+    right: 23.9%;
+    left: auto;
+  }
+  .type-selector {
+    padding-left: 1rem;
+  }
+}
+@media (max-width: 480px) {
+  .add {
+    width: 400px;
+    height: 700px;
+  }
+  .add-header {
+    gap: 220px;
+  }
+  .hardware-inputs-div {
+    flex-direction: column;
+  }
+  .ram-p {
+    top: 49.5%;
+    left: 12.8%;
+  }
+  .type-selector {
+    padding-left: 1rem;
+  }
+}
+@font-face {
+  font-family: 'Public Sans';
+  src: url("../fonts/public-sans.regular.ttf");
+}
