@@ -2,7 +2,6 @@
 $config = require_once __DIR__ . '/./server/config.php';
 require __DIR__ . '/server/core/database.php';
 require_once __DIR__ . '/server/core/session.php';
-require_once __DIR__ . '/server/controllers/check_premium.php';
 
 // Get session manager for auth handling
 $sessionClass = new \Server\Auth\SessionManager($conn);
@@ -14,8 +13,7 @@ if (!isset($user)) {
 }
 
 // Gets the is_premium bool from $user session manager
-$checkPremiumClass = new \Server\Controllers\CheckPremium($conn);
-$isPremium = $checkPremiumClass->isPremium(isset($user['is_premium']));
+$isPremium = ($user['is_premium'] === 1) ? "PRO" : "FREE";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +30,7 @@ $isPremium = $checkPremiumClass->isPremium(isset($user['is_premium']));
 <?php require __DIR__ . "/./components/dashboard_header.php"; ?>
 <!-- Main content -->
 <!-- Display if they don't have premium -->
-<?php if (isset($isPremium) && !$isPremium): ?>
+<?php if ($isPremium === "FREE"): ?>
 <div class="pay-message">
     <p class="pay-x" onclick="$('.pay-message').addClass('close'); setTimeout(() => { $('.pay-message').css('display', 'none') }, 500);">X</p>
     <h3 class="pay-h3">Thanks for using Asset Node</h3>

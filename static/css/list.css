@@ -15,7 +15,8 @@ option {
   transform: translate(-50%, -50%);
   z-index: 9999; 
   width: 700px;
-  height: 500px;
+  height: 720px;
+  overflow-y: auto;
   background-color: #415677;
   border: 2px solid #fff;
 }
@@ -29,7 +30,14 @@ option {
 .add-header-x {
   cursor: pointer;
 }
-.add-header-x,
+.add-header-x {
+  font-family: 'Public Sans';
+  color: #fff;
+  font-size: 25px;
+  font-weight: 600;
+  margin: 0;
+  margin-top: 10px;
+}
 .add-header-title {
   font-family: 'Public Sans';
   color: #fff;
@@ -52,6 +60,7 @@ option {
   height: auto;
   max-width: 100%;
   gap: 30px;
+  padding-bottom: 30px;
 }
 .select-div,
 .input-div {
@@ -205,11 +214,63 @@ option {
       width: 40px;
   }
 }
+.submit-hardware {
+  color: black;
+  font-family: 'Public Sans';
+  font-size: 17px;
+  position: relative;
+  top: 20px;
+  left: 100px;
+  cursor: pointer;
+  background-color: #ffffff;
+  border-top-left-radius: 30%;
+  border-bottom-right-radius: 30%;
+  width: 100px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#asset-hardware,
+#asset-assigned-user,
+#asset-storage-capacity,
+#asset-ip-address,
+#asset-mac-address,
+#asset-condition,
+#asset-depreciation,
+#asset-cost,
+#asset-location,
+#asset-assigned-user,
+#asset-warranty-expiration-date,
+#asset-purchase-date,
+#asset-os,
+#asset-ram,
+#asset-make,
+#asset-serial-number,
 #asset-id,
 #asset-type {
   color: #ffffff;
   font-family: 'Public Sans';
 }
+#asset_storage_capacity-input,
+#asset_depreciation-input,
+#asset_cost-input {
+  color: #ffffff;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  padding: 8px;
+  width: 100%;
+  font-size: 17px;
+  outline: none;
+}
+#asset_hardware-input,
+#asset_assigned-user-input,
+#asset_ip_address-input,
+#asset_mac_address-input,
+#asset_warranty-expiration-date-input,
+#asset_purchase-date-input,
+#asset_serial_number-input,
 #asset_id-input {
   color: #ffffff;
   background-color: transparent;
@@ -217,10 +278,14 @@ option {
   border-radius: 5px;
   padding: 8px;
   font-size: 17px;
-}
-#asset_id-input {
   outline: none;
 }
+#AssetCondition,
+#AssetLocation,
+#AssetAssignedUser,
+#AssetOS,
+#AssetRam,
+#AssetMake,
 #AssetType {
   color: #ffffff;
   background-color: transparent;
@@ -230,17 +295,29 @@ option {
   outline: none;
   font-family: 'Public Sans';
   font-size: 15px;
+  width: 100%;
+}
+.input-div-storage-capacity,
+.input-div-depreciation,
+.input-div-cost,
+.select-div-ram {
+  display: flex;
+  align-items: center;
 }
 .asset-type-option {
   color: #ffffff;
   font-size: 17px;
   font-family: 'Public Sans';
 }
+.storage-capacity-p,
+.depreciation-p,
+.cost-p,
 .ram-p {
-  position: absolute;
-  top: 30%;
-  left: 73%;
   color: #ffffff;
+  font-family: 'Public Sans';
+  margin: 0;
+  font-size: 17px;
+  margin-right: 10px;
 }
 @media (max-width: 900px) {
   .add {

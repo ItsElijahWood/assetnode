@@ -2,17 +2,12 @@
 $config = require_once __DIR__ . '/../server/config.php';
 require __DIR__ . '/../server/core/database.php';
 require_once __DIR__ . '/../server/core/session.php';
-require_once __DIR__ . '/../server/controllers/check_premium.php';
 
 // Get session manager for auth handling
 $sessionClass = new \Server\Auth\SessionManager($conn);
 $user = $sessionClass->getUser();
 
-// Gets the is_premium bool from $user session manager
-$checkPremiumClass = new \Server\Controllers\CheckPremium($conn);
-$isPremium = $checkPremiumClass->isPremium(isset($user['is_premium']));
-
-$premium_tier = $isPremium ? "PRO" : "FREE";
+$isPremium = ($user['is_premium'] === 1) ? "PRO" : "FREE";
 ?>
 <link rel="stylesheet" href="/../static/css/dashboard_header.css">
 <!-- Header -->
@@ -24,7 +19,7 @@ $premium_tier = $isPremium ? "PRO" : "FREE";
     <!-- Sidebar -->
     <div id="sidebar" class="sidebar">
         <img class="menu-sidebar" alt="Menu Sidebar Logo Button" src="/../static/img/Menu.svg" onclick="$('.sidebar').removeClass('open');">
-        <a class="premium-tier"><?= $premium_tier ?></a>
+        <a class="premium-tier"><?= $isPremium ?></a>
         <!-- Sidebar buttons -->
         <hr class="hr">
         <div class="sidebar-buttons">

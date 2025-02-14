@@ -1,6 +1,7 @@
 <?php
 namespace Server\Controllers;
 
+// Normally you should use $user session var this is only used for backend contact
 class CheckPremium {
   private $conn;
 

@@ -38,15 +38,16 @@ class Signup
                 serial_number VARCHAR(200) NOT NULL,
                 purchase_date VARCHAR(200) NOT NULL,
                 warranty_expiration_date VARCHAR(200) NOT NULL,
-                assigned_user VARCHAR(200) NOT NULL,
                 location VARCHAR(200) NOT NULL,
-                cost INT(200) NOT NULL,
+                cost INT(255) NOT NULL,
+                depreciation INT(100) NOT NULL,
+                user_hardware VARCHAR(200) NOT NULL,
                 asset_condition VARCHAR(200) NOT NULL,
-                maintenance_history VARCHAR(200) NOT NULL,
-                mac_address VARCHAR(200) NOT NULL,
-                operating_system VARCHAR(200) NOT NULL,
-                storage_capacity VARCHAR(200) NOT NULL,
-                ram VARCHAR(200) NOT NULL
+                mac_address VARCHAR(200) NULL,
+                ip_address VARCHAR(200) NULL,
+                operating_system VARCHAR(200) NULL,
+                storage_capacity VARCHAR(200) NULL,
+                ram VARCHAR(200) NULL
             );
         ";
         
@@ -77,10 +78,12 @@ class Signup
         $uid_string = "uid_" . intval($row['id']) . "_preset";
     
         $sqlCreateTable = "CREATE TABLE `$uid_string` (
-            asset_type VARCHAR(255) DEFAULT NULL,
-            ram INT(255) DEFAULT NULL,
-            operating_system VARCHAR(255) DEFAULT NULL,
-            make VARCHAR(255) DEFAULT NULL
+            asset_type VARCHAR(255),
+            ram VARCHAR(255),
+            operating_system VARCHAR(255),
+            make VARCHAR(255),
+            location_asset VARCHAR(255),
+            asset_condition VARCHAR(255)
         )";
     
         if (!mysqli_query($this->connAssets, $sqlCreateTable)) {
@@ -88,14 +91,17 @@ class Signup
         }
     
         // Insert default values into the assets table
-        $sqlInsertAssets = "INSERT INTO `$uid_string` (asset_type, ram, operating_system, make) VALUES
-            ('Laptop', '2', 'Windows', 'Asus'),
-            ('Desktop', '4', 'Linux', 'Apple'),
-            ('Tablet', '6', 'OS X', 'Acer'),
-            ('Phone', '8', 'iOS', 'Epson'),
-            ('Server', '16', 'Android', 'Fujitsu'),
-            ('Projector', '32', 'ChromeOS', 'Google'),
-            ('Switch', '64', '', 'HP')";
+        $sqlInsertAssets = "INSERT INTO `$uid_string` (asset_type, ram, operating_system, make, location_asset, asset_condition) VALUES
+            ('-', '-', '-', '-', '-', '-'),
+            ('Desktop', '2', 'Android', 'Acer', 'Basement', 'Unrepairable'),
+            ('Laptop', '4', 'ChromeOS', 'Apple', 'Dining Room', 'Broken'),  
+            ('Monitor', '6', 'iOS', 'Asus', 'Entrance', 'Poor'),        
+            ('Phone', '8', 'Linux', 'Epson', 'Garage', 'Fair'),
+            ('Projector', '16', 'macOS', 'Fujitsu', 'Kitchen', 'Good'),
+            ('Server', '32', 'Windows', 'Google', 'Lounge', 'Excellent'),
+            ('Switch', '64', '', 'HP', 'Office', ''),
+            ('Tablet', '128', '', 'MSI', 'Meeting Room', ''),
+            ('UPS', '256', '', 'Microsoft', 'Study Room', '')";
     
         if (!mysqli_query($this->connAssets, $sqlInsertAssets)) {
             return ["success" => false, "message" => "Failed to insert default assets."];
