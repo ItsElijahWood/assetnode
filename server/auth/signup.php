@@ -32,15 +32,15 @@ class Signup
         $sql = "
             CREATE TABLE IF NOT EXISTS `$uid_string` (     
                 type VARCHAR(200) NOT NULL,
-                asset_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+                asset_id INT NOT NULL,
                 asset_type VARCHAR(200) NOT NULL,
                 make VARCHAR(200) NOT NULL,
                 serial_number VARCHAR(200) NOT NULL,
                 purchase_date VARCHAR(200) NOT NULL,
                 warranty_expiration_date VARCHAR(200) NOT NULL,
                 location VARCHAR(200) NOT NULL,
-                cost INT(255) NOT NULL,
-                depreciation INT(100) NOT NULL,
+                cost DOUBLE(10,2) NOT NULL,
+                depreciation INT NOT NULL,
                 user_hardware VARCHAR(200) NOT NULL,
                 asset_condition VARCHAR(200) NOT NULL,
                 mac_address VARCHAR(200) NULL,

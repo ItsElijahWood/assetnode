@@ -31,12 +31,12 @@ Run the following command:
 sudo apt install php composer -y
 ```
 
-### 3️⃣ Install Dependencies  
+### 3️⃣ Install Dependencies and Database
 Navigate to the project directory and run:  
 ```bash
 composer install
 ```
-This will install all required dependencies specified in `composer.json`.  
+This will install all required dependencies specified in `composer.json`. 
 
 ---
 

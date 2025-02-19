@@ -4,6 +4,10 @@ html, body {
   background-color: #242d3b;
   overflow-x: hidden;
 }
+input[readonly] {
+  cursor: not-allowed !important;
+  color: #bbb !important; 
+}
 option {
   font-size: 17px;
 }
@@ -319,6 +323,14 @@ option {
   font-size: 17px;
   margin-right: 10px;
 }
+#error-msg {
+  position: absolute;
+  color: white;
+  font-family: 'Public Sans';
+  font-size: 16px;
+  bottom: -10px;
+  left: 1%;
+}
 @media (max-width: 900px) {
   .add {
     width: 700px;
@@ -352,6 +364,11 @@ option {
   }
   .type-selector {
     padding-left: 1rem;
+  }
+  #error-msg {
+    position: relative;
+    top: 0;
+    left: 0;
   }
 }
 @font-face {

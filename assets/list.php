@@ -3,8 +3,6 @@ $config = require_once __DIR__ . '/../server/config.php';
 require __DIR__ . '/../server/core/database.php';
 require_once __DIR__ . '/../server/core/session.php';
 require_once __DIR__ . '/../server/controllers/check_premium.php';
-require __DIR__ . '/../server/sql/list_preset.php';
-
 // Get session manager for auth handling
 $sessionClass = new \Server\Auth\SessionManager($conn);
 $user = $sessionClass->getUser();
@@ -13,6 +11,8 @@ $user = $sessionClass->getUser();
 if (!isset($user)) {
     header('Location: /404');
 }
+
+require __DIR__ . '/../server/sql/list_preset.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +38,7 @@ if (!isset($user)) {
     <a class="a-new" onclick="$('.add').css('display', 'block'); $('*:not(.add, .add *, body, html)').css('opacity', '0.8');">New</a>
 </div>
 <!-- Add -->
-<div class="add">
+<div id="add" class="add">
     <div class="add-header">
         <p class="add-header-title">Add Assets</p>
         <a class="add-header-x" onclick="$('.add').css('display', 'none'); $('*:not(.add, .add *, body, html)').css('opacity', '1');">X</a>
@@ -85,7 +85,7 @@ if (!isset($user)) {
             <input type="date" id="asset_purchase-date-input" required>
         </div>
         <div class="input-div">
-            <label id="asset-warranty-expiration-date" for="asset-warranty-expiration-date">Warranty Expiration*</label>
+            <label id="asset-warranty-expiration-date" for="asset-warranty-expiration-date">Warranty Expiration</label>
             <input type="date" id="asset_warranty-expiration-date-input" required>
         </div>
         <div class="select-div">
@@ -161,6 +161,7 @@ if (!isset($user)) {
             </select>
         </div>
         <a class="submit-hardware">Add Asset</a>
+        <p id="error-msg"></p>
         </div>
     </div>
 </div>
@@ -169,7 +170,68 @@ if (!isset($user)) {
 <script src="../static/js/popup_event_block.js"></script>
 <script>
     $(document).ready(function () {
-     
+        $('.submit-hardware').click(function (event) {
+            event.preventDefault(); 
+
+            let requiredFields = [
+                { id: '#AssetType', name: 'Asset Type' },
+                { id: '#AssetMake', name: 'Asset Make' },
+                { id: '#asset_serial_number-input', name: 'Serial Number' },
+                { id: '#asset_purchase-date-input', name: 'Purchase Date' },
+                { id: '#asset_cost-input', name: 'Cost' },
+                { id: '#asset_depreciation-input', name: 'Depreciation' },
+                { id: '#AssetCondition', name: 'Condition' }
+            ];
+
+            let missingFields = [];
+            requiredFields.forEach(field => {
+                if (!$(field.id).val().trim()) {
+                    missingFields.push(field.name);
+                }
+            });
+
+            if (missingFields.length > 0) {
+                $('#error-msg').html("Missing fields: " + missingFields.join(", "));
+                return;
+            }
+
+            let formData = {
+                asset_category: $('#asset_hardware-input').val(),
+                asset_id: $('#asset_id-input').val(),
+                asset_type: $('#AssetType').val(),
+                asset_make: $('#AssetMake').val(),
+                serial_number: $('#asset_serial_number-input').val(),
+                purchase_date: $('#asset_purchase-date-input').val(),
+                warranty_expiration: $('#asset_warranty-expiration-date-input').val(),
+                location: $('#AssetLocation').val(),
+                assigned_user: $('#asset_assigned-user-input').val(),
+                cost: $('#asset_cost-input').val(),
+                depreciation: $('#asset_depreciation-input').val(),
+                condition: $('#AssetCondition').val(),
+                mac_address: $('#asset_mac_address-input').val(),
+                ip_address: $('#asset_ip_address-input').val(),
+                ram: $('#AssetRam').val(),
+                storage_capacity: $('#asset_storage_capacity-input').val(),
+                os: $('#AssetOS').val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "../server/sql/list_submit.php",
+                data: formData,
+                dataType: "json",
+                success: function (res) {
+                    if (res.success) {
+                        window.location.href = '/dashboard';
+                    } else {
+                        $('#error-msg').html(res.message);
+                    }
+                },
+                error: function (res) {
+                    $('#error-msg').html("An error occurred.");
+                }
+            });
+        });
     });
 </script>
 </body>

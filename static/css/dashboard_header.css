@@ -37,7 +37,7 @@
 }
 .hr {
   position: absolute;
-  top: 11%;
+  top: 7%;
   width: 100%;
 }
 .menu-sidebar {
@@ -68,7 +68,7 @@
   text-align: right;
   gap: 40px;
   position: absolute;
-  top: 20vh;
+  top: 15vh;
   left: 80px;
   z-index: 1;
 }
