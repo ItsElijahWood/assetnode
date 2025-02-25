@@ -13,5 +13,7 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {}
+    "require": {
+        "itselijahwood/profanity": "^1.0"
+    }
 }

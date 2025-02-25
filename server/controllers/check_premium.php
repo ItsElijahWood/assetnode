@@ -2,14 +2,17 @@
 namespace Server\Controllers;
 
 // Normally you should use $user session var this is only used for backend contact
-class CheckPremium {
+class CheckPremium
+{
   private $conn;
 
-  public function __construct($conn) {
+  public function __construct($conn)
+  {
     $this->conn = $conn;
   }
 
-  public function isPremium($userId) {
+  public function isPremium($userId)
+  {
     $stmt = mysqli_prepare($this->conn, "SELECT * FROM accounts WHERE id = ?");
 
     mysqli_stmt_bind_param($stmt, "i", $userId);

@@ -1,5 +1,8 @@
 <?php
+
 namespace Server\Auth;
+
+use Server\Controllers\Filterwords;
 
 class Signup
 {
@@ -12,7 +15,8 @@ class Signup
         $this->connAssets = $connAssets;
     }
 
-    public function createAssetDatabase($email) {
+    public function createAssetDatabase($email)
+    {
         if (!$email) {
             return ["success" => false, "message" => "All fields are required."];
         }
@@ -50,33 +54,34 @@ class Signup
                 ram VARCHAR(200) NULL
             );
         ";
-        
+
         if (!mysqli_query($this->connAssets, $sql)) {
             return ["success" => false, "message" => "Failed to execute database query"];
         }
     }
 
-    public function createAssetPreset($email) {
+    public function createAssetPreset($email)
+    {
         if (!$email) {
             return ["success" => false, "message" => "All fields are required."];
         }
-    
+
         $stmt = mysqli_prepare($this->conn, "SELECT id FROM accounts WHERE email = ?");
         mysqli_stmt_bind_param($stmt, "s", $email);
-    
+
         if (!mysqli_stmt_execute($stmt)) {
             return ["success" => false, "message" => "Error executing database query."];
         }
-    
+
         $result = mysqli_stmt_get_result($stmt);
         $row = mysqli_fetch_assoc($result);
-    
+
         if (!$row) {
             return ["success" => false, "message" => "User not found."];
         }
-    
+
         $uid_string = "uid_" . intval($row['id']) . "_preset";
-    
+
         $sqlCreateTable = "CREATE TABLE `$uid_string` (
             asset_type VARCHAR(255),
             ram VARCHAR(255),
@@ -85,11 +90,11 @@ class Signup
             location_asset VARCHAR(255),
             asset_condition VARCHAR(255)
         )";
-    
+
         if (!mysqli_query($this->connAssets, $sqlCreateTable)) {
             return ["success" => false, "message" => "Failed to create asset preset table."];
         }
-    
+
         // Insert default values into the assets table
         $sqlInsertAssets = "INSERT INTO `$uid_string` (asset_type, ram, operating_system, make, location_asset, asset_condition) VALUES
             ('-', '-', '-', '-', '-', '-'),
@@ -102,13 +107,13 @@ class Signup
             ('Switch', '64', '', 'HP', 'Office', ''),
             ('Tablet', '128', '', 'MSI', 'Meeting Room', ''),
             ('UPS', '256', '', 'Microsoft', 'Study Room', '')";
-    
+
         if (!mysqli_query($this->connAssets, $sqlInsertAssets)) {
             return ["success" => false, "message" => "Failed to insert default assets."];
         }
-    
+
         return ["success" => true, "message" => "Asset preset created successfully."];
-    }    
+    }
 
     public function register($user, $email, $password)
     {
@@ -155,11 +160,18 @@ class Signup
 
 require_once __DIR__ . '/../core/database.php';
 require_once __DIR__ . '/../core/db/database_assets.php';
+require_once __DIR__ . '/../controllers/filter_words.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $signup = new Signup($conn, $connAssets);
+    $filter = new Filterwords();
 
     $username = trim($_POST['user'] ?? '');
+    if ($filter->filterText($username)) {
+        echo json_encode(['success' => false, 'message' => "Inappropriate name."]);
+        exit();
+    }
+
     $email = trim($_POST['email'] ?? '');
     $password = trim($_POST['password'] ?? '');
 

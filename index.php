@@ -3,6 +3,7 @@ $config = require __DIR__ . '/server/config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@ $config = require __DIR__ . '/server/config.php';
     <link rel="stylesheet" href="./static/css/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
+
 <body>
     <?php require __DIR__ . '/./components/header.php'; ?>
     <!-- Main content -->
@@ -22,4 +24,5 @@ $config = require __DIR__ . '/server/config.php';
         <img class="rodeo-img" alt="Rodeo mascot" src="./static/img/rodeo.png">
     </div>
 </body>
+
 </html>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 $config = require __DIR__ . '/../server/config.php';
 ?>
 <link rel="stylesheet" href="./static/css/header.css">

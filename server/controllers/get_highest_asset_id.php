@@ -1,14 +1,17 @@
 <?php
 namespace Server\Controllers;
 
-class Get_highest_asset_id {
+class Get_highest_asset_id
+{
   private $connAssets;
 
-  public function __construct($connAssets) {
+  public function __construct($connAssets)
+  {
     $this->connAssets = $connAssets;
   }
 
-  public function getAssetCount($uid) {
+  public function getAssetCount($uid)
+  {
     $uidString = "uid_" . intval($uid);
     $sql = "SELECT COUNT(asset_id) AS asset_count FROM `$uidString`";
 
@@ -20,4 +23,3 @@ class Get_highest_asset_id {
     return $resultRow ? $resultRow['asset_count'] : 0; // Return 0 if no assets found
   }
 }
-?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 $config = require_once __DIR__ . '/../server/config.php';
 require __DIR__ . '/../server/core/database.php';
 require_once __DIR__ . '/../server/core/session.php';

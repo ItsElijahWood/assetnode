@@ -96,6 +96,43 @@ html, body {
   color: black;
   cursor: pointer;
 }
+.dashboard-1 {
+  width: 100%;
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 1.5rem;
+  padding-top: 2rem;
+  gap: 15px;
+}
+.asset-total,
+.asset-type {
+  width: 200px;
+  height: 100px;
+  text-align: center;
+  background-color: #407de0;
+  border: #fff 1px solid;
+}
+.asset-id {
+  width: 150px;
+  height: 100px;
+  text-align: center;
+  background-color: #407de0;
+  border: #fff 1px solid;
+}
+.d-h {
+  color: #ffffff;
+  font-family: 'Public Sans';
+  font-size: 17px;
+  font-weight: 600;
+  width: 100%;
+}
+.d-p {
+  color: #ffffff;
+  font-family: 'Public Sans';
+  font-size: 18px;
+  width: 100%;
+}
 @font-face {
   font-family: 'Public Sans';
   src: url("../fonts/public-sans.regular.ttf");
