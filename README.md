@@ -11,6 +11,32 @@ This project is built using:
 - **Database:** MySQL  
 - **Host:** Apache
 
+# Setup
+
+To setup make sure you have a .env file for docker in root directory and config.php for connecting to the database.
+
+.env example:
+```.env
+    MYSQL_ROOT_PASSWORD=
+    MYSQL_DATABASE=
+    MYSQL_USER=
+    MYSQL_PASSWORD=
+    PMA_HOST=
+```
+
+config.php example:
+```php
+    <?php
+    return [
+        "DB_HOST" => "",
+        "DB_USER" => "",
+        "DB_PASSWORD" => "",
+        "DB_NAME" => "",
+        "DB_NAME_ASSETS" => "",
+        "WEBSITE_URL" => "http://localhost:80"
+    ];
+```
+
 ## 🔒 License  
 
-This project is **currently closed source**.  
+MIT License

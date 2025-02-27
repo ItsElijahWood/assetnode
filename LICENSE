@@ -1,29 +1,21 @@
-Asset Node Software License Agreement
+MIT License
 
-1. Grant of License
-This Asset Node software ("Software") is licensed, not sold. The Licensor grants the Licensee a non-exclusive, non-transferable license to use the Software solely for internal business or personal purposes.
+Copyright (c) 2025 Elijah Wood
 
-2. Restrictions
-The Licensee shall not:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Modify, reverse engineer, decompile, or disassemble the Software.
-Distribute, sublicense, lease, rent, or sell the Software.
-Use the Software to develop a competing product.
-Remove or alter any copyright, trademark, or proprietary notices within the Software.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-3. Ownership
-The Licensor retains all rights, title, and interest in and to the Software, including all intellectual property rights. This agreement does not grant the Licensee any ownership rights.
-
-4. Warranty Disclaimer
-THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
-
-5. Limitation of Liability
-IN NO EVENT SHALL THE LICENSOR BE LIABLE FOR ANY DAMAGES ARISING OUT OF OR RELATED TO THE USE OR INABILITY TO USE THE SOFTWARE.
-
-6. Termination
-This license is effective until terminated. The Licensor may terminate this license if the Licensee fails to comply with any terms of this agreement. Upon termination, the Licensee must cease all use of the Software and destroy all copies.
-
-By using the Software, the Licensee agrees to be bound by the terms of this License Agreement.
-
-Elijah Wood
-05-02-2025
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

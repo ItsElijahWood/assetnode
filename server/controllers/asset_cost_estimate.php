@@ -23,6 +23,10 @@ class Asset_cost_estimate
     private function estimateTotal($query)
     {
         $totalCount = null;
+
+	if ($query->num_rows <= 0) {
+	  return $totalCount = '0';
+	}
         while ($row = mysqli_fetch_assoc($query)) {
             $totalCount += $row['cost'];
         }

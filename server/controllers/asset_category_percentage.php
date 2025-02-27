@@ -10,6 +10,12 @@ class Asset_category_percentage
     $this->connAssets = $connAssets;
   }
 
+  /**
+   * Retrieves the asset category distribution for a given user ID.
+   *
+   * @param int $uid 
+   * @return string
+   */
   public function getAssetCategory($uid)
   {
     $uidString = "uid_" . intval($uid);
@@ -20,10 +26,14 @@ class Asset_category_percentage
     $typeCounts = [];
     $totalCount = 0;
 
-    while ($row = mysqli_fetch_assoc($result)) {
-      $type = $row['type'];
-      $typeCounts[$type] = ($typeCounts[$type] ?? 0) + 1;
-      $totalCount++;
+    if ($result->num_rows > 0) {
+      while ($row = mysqli_fetch_assoc($result)) {
+        $type = $row['type'];
+        $typeCounts[$type] = ($typeCounts[$type] ?? 0) + 1;
+        $totalCount++;
+      }
+    } else {
+	return "-";
     }
 
     $percentages = [];
