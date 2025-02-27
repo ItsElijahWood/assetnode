@@ -13,7 +13,7 @@ This project is built using:
 
 # Setup
 
-To setup make sure you have a .env file for docker in root directory and config.php for connecting to the database.
+To setup make sure you have a .env file for docker in root directory and config.php in server directory for connecting to the database.
 
 .env example:
 ```.env
