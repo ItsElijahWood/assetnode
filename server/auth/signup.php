@@ -6,34 +6,34 @@ use Server\Controllers\Filterwords;
 
 class Signup
 {
-    private $conn;
-    private $connAssets;
+  private $conn;
+  private $connAssets;
 
-    public function __construct($conn, $connAssets)
-    {
-        $this->conn = $conn;
-        $this->connAssets = $connAssets;
+  public function __construct($conn, $connAssets)
+  {
+    $this->conn = $conn;
+    $this->connAssets = $connAssets;
+  }
+
+  public function createAssetDatabase($email)
+  {
+    if (!$email) {
+      return ["success" => false, "message" => "All fields are required."];
     }
 
-    public function createAssetDatabase($email)
-    {
-        if (!$email) {
-            return ["success" => false, "message" => "All fields are required."];
-        }
+    $stmt = mysqli_prepare($this->conn, "SELECT * FROM accounts WHERE email = ?");
 
-        $stmt = mysqli_prepare($this->conn, "SELECT * FROM accounts WHERE email = ?");
+    mysqli_stmt_bind_param($stmt, "s", $email);
 
-        mysqli_stmt_bind_param($stmt, "s", $email);
+    if (!mysqli_stmt_execute($stmt)) {
+      return ["success" => false, "message" => "Error executing database query."];
+    }
 
-        if (!mysqli_stmt_execute($stmt)) {
-            return ["success" => false, "message" => "Error executing database query."];
-        }
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
 
-        $result = mysqli_stmt_get_result($stmt);
-        $row = mysqli_fetch_assoc($result);
-
-        $uid_string = "uid_" . $row['id'];
-        $sql = "
+    $uid_string = "uid_" . $row['id'];
+    $sql = "
             CREATE TABLE IF NOT EXISTS `$uid_string` (     
                 type VARCHAR(200) NOT NULL,
                 asset_id INT NOT NULL,
@@ -55,34 +55,34 @@ class Signup
             );
         ";
 
-        if (!mysqli_query($this->connAssets, $sql)) {
-            return ["success" => false, "message" => "Failed to execute database query"];
-        }
+    if (!mysqli_query($this->connAssets, $sql)) {
+      return ["success" => false, "message" => "Failed to execute database query"];
+    }
+  }
+
+  public function createAssetPreset($email)
+  {
+    if (!$email) {
+      return ["success" => false, "message" => "All fields are required."];
     }
 
-    public function createAssetPreset($email)
-    {
-        if (!$email) {
-            return ["success" => false, "message" => "All fields are required."];
-        }
+    $stmt = mysqli_prepare($this->conn, "SELECT id FROM accounts WHERE email = ?");
+    mysqli_stmt_bind_param($stmt, "s", $email);
 
-        $stmt = mysqli_prepare($this->conn, "SELECT id FROM accounts WHERE email = ?");
-        mysqli_stmt_bind_param($stmt, "s", $email);
+    if (!mysqli_stmt_execute($stmt)) {
+      return ["success" => false, "message" => "Error executing database query."];
+    }
 
-        if (!mysqli_stmt_execute($stmt)) {
-            return ["success" => false, "message" => "Error executing database query."];
-        }
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
 
-        $result = mysqli_stmt_get_result($stmt);
-        $row = mysqli_fetch_assoc($result);
+    if (!$row) {
+      return ["success" => false, "message" => "User not found."];
+    }
 
-        if (!$row) {
-            return ["success" => false, "message" => "User not found."];
-        }
+    $uid_string = "uid_" . intval($row['id']) . "_preset";
 
-        $uid_string = "uid_" . intval($row['id']) . "_preset";
-
-        $sqlCreateTable = "CREATE TABLE `$uid_string` (
+    $sqlCreateTable = "CREATE TABLE `$uid_string` (
             asset_type VARCHAR(255),
             ram VARCHAR(255),
             operating_system VARCHAR(255),
@@ -91,12 +91,12 @@ class Signup
             asset_condition VARCHAR(255)
         )";
 
-        if (!mysqli_query($this->connAssets, $sqlCreateTable)) {
-            return ["success" => false, "message" => "Failed to create asset preset table."];
-        }
+    if (!mysqli_query($this->connAssets, $sqlCreateTable)) {
+      return ["success" => false, "message" => "Failed to create asset preset table."];
+    }
 
-        // Insert default values into the assets table
-        $sqlInsertAssets = "INSERT INTO `$uid_string` (asset_type, ram, operating_system, make, location_asset, asset_condition) VALUES
+    // Insert default values into the assets table
+    $sqlInsertAssets = "INSERT INTO `$uid_string` (asset_type, ram, operating_system, make, location_asset, asset_condition) VALUES
             ('-', '-', '-', '-', '-', '-'),
             ('Desktop', '2', 'Android', 'Acer', 'Basement', 'Unrepairable'),
             ('Laptop', '4', 'ChromeOS', 'Apple', 'Dining Room', 'Broken'),  
@@ -108,81 +108,90 @@ class Signup
             ('Tablet', '128', '', 'MSI', 'Meeting Room', ''),
             ('UPS', '256', '', 'Microsoft', 'Study Room', '')";
 
-        if (!mysqli_query($this->connAssets, $sqlInsertAssets)) {
-            return ["success" => false, "message" => "Failed to insert default assets."];
-        }
-
-        return ["success" => true, "message" => "Asset preset created successfully."];
+    if (!mysqli_query($this->connAssets, $sqlInsertAssets)) {
+      return ["success" => false, "message" => "Failed to insert default assets."];
     }
 
-    public function register($user, $email, $password)
-    {
-        header('Content-Type: application/json');
+    return ["success" => true, "message" => "Asset preset created successfully."];
+  }
 
-        if (!$user || !$email || !$password) {
-            return ["success" => false, "message" => "All fields are required."];
-        }
+  public function register($user, $email, $password)
+  {
+    header('Content-Type: application/json');
 
-        $stmt = mysqli_prepare($this->conn, "SELECT * FROM accounts WHERE email = ?");
-        if (!$stmt) {
-            return ["success" => false, "message" => "Prepare database error"];
-        }
-
-        mysqli_stmt_bind_param($stmt, "s", $email);
-
-        if (!mysqli_stmt_execute($stmt)) {
-            return ["success" => false, "message" => "Failed to execute database query"];
-        }
-
-        $result = mysqli_stmt_get_result($stmt);
-
-        // If a user with the same email already exists, return a message
-        if (mysqli_num_rows($result) > 0) {
-            return ["success" => false, "message" => "Email already in use."];
-        }
-
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        $stmt = mysqli_prepare($this->conn, "INSERT INTO accounts (`username`, `email`, `password`) VALUES (?, ?, ?)");
-        if (!$stmt) {
-            return ["success" => false, "message" => "Prepare database error"];
-        }
-
-        mysqli_stmt_bind_param($stmt, "sss", $user, $email, $hashedPassword);
-
-        if (!mysqli_stmt_execute($stmt)) {
-            return ["success" => false, "message" => "Failed to execute database query"];
-        }
-
-        return ["success" => true, "message" => "Signup successful"];
+    if (!$user || !$email || !$password) {
+      return ["success" => false, "message" => "All fields are required."];
     }
+
+    $stmt = mysqli_prepare($this->conn, "SELECT * FROM accounts WHERE email = ?");
+    if (!$stmt) {
+      return ["success" => false, "message" => "Prepare database error"];
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $email);
+
+    if (!mysqli_stmt_execute($stmt)) {
+      return ["success" => false, "message" => "Failed to execute database query"];
+    }
+
+    $result = mysqli_stmt_get_result($stmt);
+
+    // If a user with the same email already exists, return a message
+    if (mysqli_num_rows($result) > 0) {
+      return ["success" => false, "message" => "Email already in use."];
+    }
+
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    $stmt = mysqli_prepare($this->conn, "INSERT INTO accounts (`username`, `email`, `password`) VALUES (?, ?, ?)");
+    if (!$stmt) {
+      return ["success" => false, "message" => "Prepare database error"];
+    }
+
+    mysqli_stmt_bind_param($stmt, "sss", $user, $email, $hashedPassword);
+
+    if (!mysqli_stmt_execute($stmt)) {
+      return ["success" => false, "message" => "Failed to execute database query"];
+    }
+
+    return ["success" => true, "message" => "Signup successful"];
+  }
 }
 
 require_once __DIR__ . '/../core/database.php';
 require_once __DIR__ . '/../core/db/database_assets.php';
 require_once __DIR__ . '/../controllers/filter_words.php';
+require_once __DIR__ . '/../controllers/email_validation.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $signup = new Signup($conn, $connAssets);
-    $filter = new Filterwords();
+  $signup = new Signup($conn, $connAssets);
+  $filter = new Filterwords();
+  $email_validate = new \Server\Controllers\Email_validation();
 
-    $username = trim($_POST['user'] ?? '');
-    if ($filter->filterText($username)) {
-        echo json_encode(['success' => false, 'message' => "Inappropriate name."]);
-        exit();
-    }
+  $username = trim($_POST['user'] ?? '');
+  if ($filter->filterText($username)) {
+    echo json_encode(['success' => false, 'message' => 'Inappropriate name.']);
+    exit();
+  }
 
-    $email = trim($_POST['email'] ?? '');
-    $password = trim($_POST['password'] ?? '');
+  $email = trim($_POST['email'] ?? '');
 
-    if (empty($username) || empty($email) || empty($password)) {
-        echo json_encode(['success' => false, 'message' => "All fields are required."]);
-        exit;
-    }
+  $result = $email_validate->emailValidate($email);
+  if (!$result) {
+    echo json_encode(['success' => false, 'message' => 'Email does not exist, or is wrong format.']);
+    exit();
+  }
 
-    $response = $signup->register($username, $email, $password);
-    $signup->createAssetDatabase($email);
-    $signup->createAssetPreset($email);
+  $password = trim($_POST['password'] ?? '');
 
-    echo json_encode($response);
+  if (empty($username) || empty($email) || empty($password)) {
+    echo json_encode(['success' => false, 'message' => "All fields are required."]);
+    exit;
+  }
+
+  $response = $signup->register($username, $email, $password);
+  $signup->createAssetDatabase($email);
+  $signup->createAssetPreset($email);
+
+  echo json_encode($response);
 }

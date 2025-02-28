@@ -4,8 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "396e0381081dbf911f96d7dc2d931df0",
+    "content-hash": "e8a2742563cdf48ab6ab14dd84115d81",
     "packages": [
+        {
+            "name": "itselijahwood/inspector",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ItsElijahWood/inspector.git",
+                "reference": "9fed794b8a0977859d40c36a89e127a17965b5ac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ItsElijahWood/inspector/zipball/9fed794b8a0977859d40c36a89e127a17965b5ac",
+                "reference": "9fed794b8a0977859d40c36a89e127a17965b5ac",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ItsElijahWood\\Inspector\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "itselijahwood"
+                }
+            ],
+            "description": "A package which checks for the format and domain of an email.",
+            "support": {
+                "issues": "https://github.com/ItsElijahWood/inspector/issues",
+                "source": "https://github.com/ItsElijahWood/inspector/tree/v1.0.0"
+            },
+            "time": "2025-02-28T02:55:08+00:00"
+        },
         {
             "name": "itselijahwood/profanity",
             "version": "v1.0.2",
@@ -46,10 +82,10 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {},
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.2.0"
 }
