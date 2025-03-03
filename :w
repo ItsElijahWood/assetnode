@@ -42,7 +42,7 @@ require __DIR__ . '/../server/sql/list_preset.php';
     <?php require __DIR__ . "/../components/dashboard_header.php"; ?>
     <!-- Main content -->
     <div class="buttons">
-    <a class="a-new" onclick="$('.add').css('display', 'block'); $('*:not(.add, .add *, body, html)').css('opacity', '0.8'); document.querySelectorAll('body *').forEach(el => el.style.userSelect = 'none'); document.querySelectorAll('.add, .add *').forEach(el => el.style.userSelect = 'auto');">Add Assets</a>
+      <a class="a-new" onclick="$('.add').css('display', 'block'); $('*:not(.add, .add *, body, html)').css('opacity', '0.8'); document.querySelectorAll('body *').forEach(el => el.style.userSelect = 'none'); document.querySelectorAll('.add, .add *').forEach(el => el.style.userSelect = 'auto');">Add Assets</a>
     </div>
     <div class="list_hardware">
       <div class="list_header_hardware">
@@ -217,7 +217,7 @@ require __DIR__ . '/../server/sql/list_preset.php';
         </div>
         <div class="input-div">
           <label id="asset-id" for="asset-id">Asset id*</label>
-          <input value="" id="asset_id-input" readonly>
+          <input value="assetId()" id="asset_id-input" readonly>
         </div>
         <div class="select-div">
           <label id="asset-type">Asset Type*</label>
@@ -420,6 +420,16 @@ require __DIR__ . '/../server/sql/list_preset.php';
         });
       });
     });
+  </script>
+  <script>
+    function passAssetId(assetId) {
+      const assetId = assetid;
+      return assetId;
+    }
+
+    function assetId() {
+      return assetId;
+    }
   </script>
 </body>
 

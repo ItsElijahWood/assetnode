@@ -6,4 +6,12 @@ document.addEventListener("click", function(event) {
     event.stopPropagation();
     event.preventDefault();  
   }
+
+  if ($('.edit_view').css('display') === 'block') {
+    if ($(event.target).closest('.edit_view').length > 0) {
+      return;
+    }
+    event.stopPropagation();
+    event.preventDefault();  
+  }
 }, true);

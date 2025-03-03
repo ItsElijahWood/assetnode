@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   background-color: #242d3b;
@@ -6,24 +7,26 @@ html, body {
 }
 input[readonly] {
   cursor: not-allowed !important;
-  color: #bbb !important; 
+  color: #bbb !important;
 }
 option {
   font-size: 17px;
 }
+.edit_view,
 .add {
   display: none;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 9999; 
+  z-index: 9999;
   width: 700px;
   height: 720px;
   overflow-y: auto;
   background-color: #415677;
   border: 2px solid #fff;
 }
+.edit_view-header,
 .add-header {
   width: 100%;
   display: flex;
@@ -31,19 +34,23 @@ option {
   align-items: center;
   gap: 526px;
 }
+.edit_view-header-x,
 .add-header-x {
   cursor: pointer;
+  color: white;
+  font-family: "Public Sans";
 }
+.edit_view-title,
 .add-header-x {
-  font-family: 'Public Sans';
-  color: #fff;
+  font-family: "Public Sans";
+  color: white;
   font-size: 25px;
   font-weight: 600;
   margin: 0;
   margin-top: 10px;
 }
 .add-header-title {
-  font-family: 'Public Sans';
+  font-family: "Public Sans";
   color: #fff;
   font-size: 25px;
   font-weight: 600;
@@ -56,7 +63,7 @@ option {
   padding-left: 1.5rem;
 }
 .a-new {
-  font-family: 'Public Sans';
+  font-family: "Public Sans";
   cursor: pointer;
   color: #fff;
   font-size: 19px;
@@ -67,6 +74,16 @@ option {
 }
 .hardware-inputs-div {
   display: none;
+  flex-wrap: wrap;
+  padding-left: 1rem;
+  padding-top: 2rem;
+  height: auto;
+  max-width: 100%;
+  gap: 30px;
+  padding-bottom: 30px;
+}
+.edit_view-div {
+  display: flex;
   flex-wrap: wrap;
   padding-left: 1rem;
   padding-top: 2rem;
@@ -94,7 +111,7 @@ option {
 .type-selector-a-3,
 .type-selector-a-2,
 .type-selector-a-1 {
-  font-family: 'Public Sans';
+  font-family: "Public Sans";
   color: #ffffff;
   font-size: 18px;
 }
@@ -102,7 +119,7 @@ option {
 .type-selector-a-1:not(:hover)::after {
   content: "";
   background: white;
-  width: 0 !important; 
+  width: 0 !important;
   height: 5px;
   border-radius: 0% !important;
   position: fixed;
@@ -115,7 +132,7 @@ option {
 .type-selector-a-1.active::before {
   content: "";
   background: white;
-  width: 100px; 
+  width: 100px;
   height: 5px;
   border-radius: 15%;
   position: fixed;
@@ -127,7 +144,7 @@ option {
 .type-selector-a-1:hover::before {
   content: "";
   background: white;
-  width: 0; 
+  width: 0;
   height: 5px;
   position: fixed;
   top: 85px;
@@ -137,16 +154,16 @@ option {
 }
 @keyframes slideIn1 {
   from {
-      width: 0;
+    width: 0;
   }
   to {
-      width: 100px;
+    width: 100px;
   }
 }
 .type-selector-a-3:not(:hover)::after {
   content: "";
   background: white;
-  width: 0 !important; 
+  width: 0 !important;
   height: 5px;
   border-radius: 0 !important;
   position: fixed;
@@ -158,7 +175,7 @@ option {
 .type-selector-a-3.active::before {
   content: "";
   background: white;
-  width: 50px; 
+  width: 50px;
   height: 5px;
   position: fixed;
   top: 85px;
@@ -169,7 +186,7 @@ option {
 .type-selector-a-3:hover::before {
   content: "";
   background: white;
-  width: 0; 
+  width: 0;
   height: 5px;
   position: fixed;
   top: 85px;
@@ -179,16 +196,16 @@ option {
 }
 @keyframes slideIn2 {
   from {
-      width: 0;
+    width: 0;
   }
   to {
-      width: 47px;
+    width: 47px;
   }
 }
 .type-selector-a-4:not(:hover)::after {
   content: "";
   background: white;
-  width: 0 !important; 
+  width: 0 !important;
   height: 5px;
   border-radius: 0 !important;
   position: fixed;
@@ -200,7 +217,7 @@ option {
 .type-selector-a-4.active::before {
   content: "";
   background: white;
-  width: 40px; 
+  width: 40px;
   height: 5px;
   border-radius: 15%;
   position: fixed;
@@ -211,7 +228,7 @@ option {
 .type-selector-a-4:hover::before {
   content: "";
   background: white;
-  width: 0; 
+  width: 0;
   height: 5px;
   position: fixed;
   top: 85px;
@@ -221,15 +238,15 @@ option {
 }
 @keyframes slideIn3 {
   from {
-      width: 0;
+    width: 0;
   }
   to {
-      width: 40px;
+    width: 40px;
   }
 }
 .submit-hardware {
   color: black;
-  font-family: 'Public Sans';
+  font-family: "Public Sans";
   font-size: 17px;
   position: relative;
   top: 20px;
@@ -263,7 +280,7 @@ option {
 #asset-id,
 #asset-type {
   color: #ffffff;
-  font-family: 'Public Sans';
+  font-family: "Public Sans";
 }
 #asset_storage_capacity-input,
 #asset_depreciation-input,
@@ -306,7 +323,7 @@ option {
   border-radius: 5px;
   padding: 8px;
   outline: none;
-  font-family: 'Public Sans';
+  font-family: "Public Sans";
   font-size: 15px;
   width: 100%;
 }
@@ -320,14 +337,14 @@ option {
 .asset-type-option {
   color: #ffffff;
   font-size: 17px;
-  font-family: 'Public Sans';
+  font-family: "Public Sans";
 }
 .storage-capacity-p,
 .depreciation-p,
 .cost-p,
 .ram-p {
   color: #ffffff;
-  font-family: 'Public Sans';
+  font-family: "Public Sans";
   margin: 0;
   font-size: 17px;
   margin-right: 10px;
@@ -335,92 +352,73 @@ option {
 #error-msg {
   position: absolute;
   color: white;
-  font-family: 'Public Sans';
+  font-family: "Public Sans";
   font-size: 16px;
   bottom: -10px;
   left: 1%;
 }
 .list_hardware {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-    background-color: white;
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  height: auto;
+  background-color: white;
+  padding: 10px;
 }
-
+.list_header_p {
+  font-weight: 600;
+  font-size: 23px;
+}
 .list_header_hardware,
 .list_hardware_container {
-    display: flex;
-    justify-content: center; 
-    width: 100%;
-    background-color: white;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  width: 100%;
+  background-color: white;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
 }
 
 .list_header_column,
 .list_column {
-    flex: 1; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-.list_header_p {
-    font-family: 'Public Sans';
-    color: black;
-    font-size: 20px;
-    font-weight: 600;
-    text-align: center;
-}
-.list_column_p {
-    font-family: 'Public Sans';
-    color: black;
-    font-size: 20px;
-    text-align: center;
+  padding: 10px;
+  font-family: "Public Sans";
+  color: black;
+  text-align: center;
+  font-size: 22px;
 }
 
 @media (max-width: 900px) {
-  .add {
-    width: 700px;
+  .list_hardware {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
-  .add-header {
-    gap: 520px;
+  .list_header_p,
+  .list_column_p {
+    font-size: 16px;
   }
-  .ram-p {
-    top: 30.1%;
-    right: 23.9%;
-    left: auto;
-  }
-  .type-selector {
-    padding-left: 1rem;
+  .eye_icon {
+    display: none;
   }
 }
+
 @media (max-width: 480px) {
-  .add {
-    width: 400px;
-    height: 700px;
+  .list_hardware {
+    grid-template-columns: 1fr;
   }
-  .add-header {
-    gap: 220px;
+  .list_header_hardware,
+  .list_hardware_container {
+    grid-template-columns: 1fr;
   }
-  .hardware-inputs-div {
-    flex-direction: column;
+  .list_header_p,
+  .list_column_p {
+    font-size: 14px;
   }
-  .ram-p {
-    top: 49.5%;
-    left: 12.8%;
-  }
-  .type-selector {
-    padding-left: 1rem;
-  }
-  #error-msg {
-    position: relative;
-    top: 0;
-    left: 0;
+  .eye_icon {
+    display: none;
   }
 }
 @font-face {
-  font-family: 'Public Sans';
+  font-family: "Public Sans";
   src: url("../fonts/public-sans.regular.ttf");
 }
