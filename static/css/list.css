@@ -244,6 +244,7 @@ option {
     width: 40px;
   }
 }
+.save-hardware,
 .submit-hardware {
   color: black;
   font-family: "Public Sans";

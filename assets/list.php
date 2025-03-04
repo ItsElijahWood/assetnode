@@ -18,6 +18,60 @@ if (!isset($user)) {
 }
 
 require __DIR__ . '/../server/sql/list_preset.php';
+
+$asset_id_get = null;
+$asset_category_get = null;
+$asset_type_get = null;
+$asset_cost_get = null;
+$asset_make_get = null;
+$asset_serial_number_get = null;
+$asset_purchase_date_get = null;
+$asset_location_get = null;
+$asset_condition_get = null;
+if (
+  isset($_GET['asset_id']) &&
+  isset($_GET['asset_type']) &&
+  isset($_GET['asset_category']) &&
+  isset($_GET['asset_cost']) &&
+  isset($_GET['asset_make']) &&
+  isset($_GET['serial_number']) &&
+  isset($_GET['purchase_date']) &&
+  isset($_GET['asset_warranty']) &&
+  isset($_GET['asset_location']) &&
+  isset($_GET['asset_user']) &&
+  isset($_GET['asset_condition']) &&
+  isset($_GET['asset_depreciation']) &&
+  isset($_GET['asset_os']) &&
+  isset($_GET['asset_storage']) &&
+  isset($_GET['asset_ram']) &&
+  isset($_GET['asset_ip_address']) &&
+  isset($_GET['asset_mac_address'])
+) {
+  $asset_id_get = $_GET['asset_id'];
+  $asset_type_get = $_GET['asset_type'];
+  $asset_category_get = $_GET['asset_category'];
+  $asset_cost_get = $_GET['asset_cost'];
+  $asset_make_get = $_GET['asset_make'];
+  $asset_serial_number_get = $_GET['serial_number'];
+  $asset_purchase_date_get = $_GET['purchase_date'];
+  $asset_warranty_get = $_GET['asset_warranty'];
+  $asset_location_get = $_GET['asset_location'];
+  $asset_user_get = $_GET['asset_user'];
+  $asset_depreciation_get = $_GET['asset_depreciation'];
+  $asset_condition_get = $_GET['asset_condition'];
+  $asset_ip_address_get = $_GET['asset_ip_address'];
+  $asset_mac_address_get = $_GET['asset_mac_address'];
+  $asset_os_get = $_GET['asset_os'];
+  $asset_storage_get = $_GET['asset_storage'];
+  $asset_ram_get = $_GET['asset_ram'];
+  $asset_serial_number_get_trim = trim($asset_serial_number_get);
+  $asset_category_get_trim = preg_replace('/\+/', ' ', trim($asset_category_get));
+  $asset_user_get_trim = preg_replace('/\+/', ' ', trim($asset_user_get));
+  $asset_mac_address_get_trim = preg_replace('/%253A/', ':', urldecode(trim($asset_mac_address_get)));
+  $asset_location_get_trim = preg_replace('/\+/', ' ', urldecode(trim($asset_location_get)));
+
+  echo '<style>.edit_view { display: block } body *:not(.edit_view):not(.edit_view *) { opacity: 0.8; user-select: none; } .edit_view, .edit_view * { user-select: auto; }</style>';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +96,7 @@ require __DIR__ . '/../server/sql/list_preset.php';
     <?php require __DIR__ . "/../components/dashboard_header.php"; ?>
     <!-- Main content -->
     <div class="buttons">
-    <a class="a-new" onclick="$('.add').css('display', 'block'); $('*:not(.add, .add *, body, html)').css('opacity', '0.8'); document.querySelectorAll('body *').forEach(el => el.style.userSelect = 'none'); document.querySelectorAll('.add, .add *').forEach(el => el.style.userSelect = 'auto');">Add Assets</a>
+      <a class="a-new" onclick="$('.add').css('display', 'block'); $('*:not(.add, .add *, body, html)').css('opacity', '0.8'); document.querySelectorAll('body *').forEach(el => el.style.userSelect = 'none'); document.querySelectorAll('.add, .add *').forEach(el => el.style.userSelect = 'auto');">Add Assets</a>
     </div>
     <div class="list_hardware">
       <div class="list_header_hardware">
@@ -205,7 +259,7 @@ require __DIR__ . '/../server/sql/list_preset.php';
     </div>
     </div>
     <!-- Edit/View -->
-    <div id="edit_view" class="edit_view" style="display: none">
+    <div id="edit_view" style="display: <?php echo $asset_id_get !== null ? 'block' : 'none'; ?>;" class="edit_view" style="display: none">
       <div class="edit_view-header">
         <p class="edit_view-title">Edit Assets</p>
         <a class="edit_view-header-x" onclick="$('.edit_view').css('display', 'none'); $('*:not(.edit_view, .edit_view *, body, html)').css('opacity', '1'); document.querySelectorAll('body *').forEach(el => el.style.userSelect = 'auto');">X</a>
@@ -213,15 +267,16 @@ require __DIR__ . '/../server/sql/list_preset.php';
       <div id="edit_view-id" class="edit_view-div">
         <div class="input-div">
           <label id="asset-hardware" for="asset-hardware">Asset Category*</label>
-          <input value="IT Hardware" id="asset_hardware-input" readonly>
+          <input value="<?= $asset_category_get_trim ?>" id="asset_hardware-input" readonly>
         </div>
         <div class="input-div">
           <label id="asset-id" for="asset-id">Asset id*</label>
-          <input value="" id="asset_id-input" readonly>
+          <input value="<?= $asset_id_get ?>" id="asset_id-input" readonly>
         </div>
         <div class="select-div">
           <label id="asset-type">Asset Type*</label>
           <select id="AssetType" required>
+            <option style="color: black;"><?= $asset_type_get ?></option>
             <?php foreach ($resultAssetType as $type): ?>
               <?php if ($type[0] == '')
                 continue; ?>
@@ -232,6 +287,7 @@ require __DIR__ . '/../server/sql/list_preset.php';
         <div class="select-div">
           <label id="asset-make">Make*</label>
           <select id="AssetMake" required>
+            <option style="color: black;"><?= $asset_make_get ?></option>
             <?php foreach ($resultAssetMake as $make): ?>
               <?php if ($make[0] == '')
                 continue; ?>
@@ -241,19 +297,20 @@ require __DIR__ . '/../server/sql/list_preset.php';
         </div>
         <div class="input-div">
           <label id="asset-serial-number" for="asset-serial-number">Serial Number*</label>
-          <input id="asset_serial_number-input" required>
+          <input value="<?= $asset_serial_number_get_trim ?>" id="asset_serial_number-input" required>
         </div>
         <div class="input-div">
           <label id="asset-purchase-date" for="asset-purchase-date">Purchase Date*</label>
-          <input type="date" id="asset_purchase-date-input" required>
+          <input value="<?= $asset_purchase_date_get ?>" type="date" id="asset_purchase-date-input" required>
         </div>
         <div class="input-div">
           <label id="asset-warranty-expiration-date" for="asset-warranty-expiration-date">Warranty Expiration</label>
-          <input type="date" id="asset_warranty-expiration-date-input" required>
+          <input value="<?= $asset_warranty_get ?>" type="date" id="asset_warranty-expiration-date-input" required>
         </div>
         <div class="select-div">
           <label id="asset-location">Location</label>
           <select id="AssetLocation" required>
+            <option style="color: black;"><?= $asset_location_get_trim ?></option>
             <?php foreach ($resultAssetLocation as $location): ?>
               <?php if ($location[0] == '')
                 continue; ?>
@@ -263,25 +320,26 @@ require __DIR__ . '/../server/sql/list_preset.php';
         </div>
         <div class="input-div">
           <label id="asset-assigned-user" for="asset-assigned-user">Assigned User</label>
-          <input id="asset_assigned-user-input" required>
+          <input value="<?= $asset_user_get_trim ?>" id="asset_assigned-user-input" required>
         </div>
         <div class="input-div">
           <label id="asset-cost" for="asset-cost">Cost*</label>
           <div class="input-div-cost">
             <p class="cost-p">£</p>
-            <input id="asset_cost-input" required>
+            <input value="<?= $asset_cost_get ?>" id="asset_cost-input" required>
           </div>
         </div>
         <div class="input-div">
           <label id="asset-depreciation" for="asset-depreciation">Annual Depreciation*</label>
           <div class="input-div-depreciation">
             <p class="depreciation-p">%</p>
-            <input id="asset_depreciation-input" min="1" max="100" type="number" required>
+            <input value="<?= $asset_depreciation_get ?>" id="asset_depreciation-input" min="1" max="100" type="number" required>
           </div>
         </div>
         <div class="select-div">
           <label id="asset-condition">Condition*</label>
           <select id="AssetCondition" required>
+            <option style="color: black;"><?= $asset_condition_get ?></option>
             <?php foreach ($resultAssetCondition as $condition): ?>
               <?php if ($condition[0] == '')
                 continue; ?>
@@ -291,17 +349,18 @@ require __DIR__ . '/../server/sql/list_preset.php';
         </div>
         <div class="input-div">
           <label id="asset-mac-address" for="asset-mac-address">Mac Address</label>
-          <input id="asset_mac_address-input" required>
+          <input value="<?= $asset_mac_address_get_trim ?>" id="asset_mac_address-input" required>
         </div>
         <div class="input-div">
           <label id="asset-ip-address" for="asset-ip-address">IP Address</label>
-          <input id="asset_ip_address-input" required>
+          <input value="<?= $asset_ip_address_get ?>" id="asset_ip_address-input" required>
         </div>
         <div class="select-div">
           <label id="asset-ram">Ram</label>
           <div class="select-div-ram">
             <p class="ram-p">GB</p>
             <select id="AssetRam" required>
+              <option style="color: black;"><?= $asset_ram_get ?></option>
               <?php foreach ($resultAssetRam as $ram): ?>
                 <?php if ($ram[0] == '')
                   continue; ?>
@@ -314,12 +373,13 @@ require __DIR__ . '/../server/sql/list_preset.php';
           <label id="asset-storage-capacity" for="asset-storage-capacity">Storage Capacity</label>
           <div class="input-div-storage-capacity">
             <p class="storage-capacity-p">MB</p>
-            <input id="asset_storage_capacity-input" min="1" max="100" type="number" required>
+            <input value="<?= $asset_storage_get ?>" id="asset_storage_capacity-input" min="1" max="100" type="number" required>
           </div>
         </div>
         <div class="select-div">
           <label id="asset-os">OS</label>
           <select id="AssetOS" required>
+            <option style="color: black;"><?= $asset_os_get ?></option>
             <?php foreach ($resultAssetOS as $os): ?>
               <?php if ($os[0] == '')
                 continue; ?>
@@ -327,7 +387,7 @@ require __DIR__ . '/../server/sql/list_preset.php';
             <?php endforeach; ?>
           </select>
         </div>
-        <a class="submit-hardware">Add Asset</a>
+        <a class="save-hardware">Save Asset</a>
         <p id="error-msg"></p>
       </div>
     </div>
@@ -367,7 +427,7 @@ require __DIR__ . '/../server/sql/list_preset.php';
           {
             id: '#AssetCondition',
             name: 'Condition'
-          }
+          },
         ];
 
         let missingFields = [];
@@ -420,6 +480,64 @@ require __DIR__ . '/../server/sql/list_preset.php';
         });
       });
     });
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('.save-hardware').click(function(event) {
+        event.preventDefault();
+        const assetId = $('#asset_id-input').val();
+        const assetCategory = $('#asset_hardware-input').val();
+        const assetType = $('#AssetType').val();
+        const assetMake = $('#AssetMake').val();
+        const assetSerialNumber = $('#asset_serial_number-input').val();
+        const assetPurchaseDate = $('#asset_purchase-date-input').val();
+        const assetWarranty = $('#asset_warranty-expiration-date-input').val();
+        const assetLocation = $('#AssetLocation').val();
+        const assetUser = $('#asset_assigned-user-input').val();
+        const assetCost = $('#asset_cost-input').val();
+        const assetDepreciation = $('#asset_depreciation-input').val();
+        const assetCondition = $('#AssetCondition').val();
+        const assetMacAddress = $('#asset_mac_address-input').val();
+        const assetIpAddress = $('#asset_ip_address-input').val();
+        const assetRam = $('#AssetRam').val();
+        const assetStorage = $('#asset_storage_capacity-input').val();
+        const assetOs = $('#AssetOS').val();
+
+        $.ajax({
+          url: '../server/controllers/update_assets.php',
+          type: 'POST',
+          data: {
+            asset_id: assetId,
+            asset_category: assetCategory,
+            asset_type: assetType,
+            asset_make: assetMake,
+            serial_number: assetSerialNumber,
+            purchase_date: assetPurchaseDate,
+            asset_warranty: assetWarranty,
+            asset_location: assetLocation,
+            asset_user: assetUser,
+            asset_cost: assetCost,
+            asset_depreciation: assetDepreciation,
+            asset_condition: assetCondition,
+            asset_mac_address: assetMacAddress,
+            asset_ip_address: assetIpAddress,
+            asset_ram: assetRam,
+            asset_storage: assetStorage,
+            asset_os: assetOs
+          },
+          success: function(response) {
+            if (response.success) {
+              $('#error-msg').html(response.message);
+            } else {
+              $('#error-msg').html(response.message);
+            }
+          },
+          error: function(response) {
+            $('#error-msg').html(response.message);
+          },
+        });
+      })
+    })
   </script>
 </body>
 
