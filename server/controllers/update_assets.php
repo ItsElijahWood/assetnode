@@ -30,43 +30,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $uid_string = "uid_" . intval($user['id']);
 
   $stmt = $connAssets->prepare("UPDATE `$uid_string` SET 
-        type = ?, 
-        asset_type = ?, 
-        make = ?, 
-        serial_number = ?, 
-        purchase_date = ?, 
-        warranty_expiration_date = ?, 
-        location = ?, 
-        user_hardware = ?, 
-        cost = ?, 
-        depreciation = ?, 
-        asset_condition = ?, 
-        mac_address = ?, 
-        ip_address = ?, 
-        ram = ?, 
-        storage_capacity = ?, 
-        operating_system = ? 
-        WHERE asset_id = ?");
+    type = ?, 
+    asset_type = ?, 
+    make = ?, 
+    serial_number = ?, 
+    purchase_date = ?, 
+    warranty_expiration_date = ?, 
+    location = ?, 
+    cost = ?, 
+    depreciation = ?, 
+    user_hardware = ?, 
+    asset_condition = ?, 
+    mac_address = ?, 
+    ip_address = ?, 
+    operating_system = ?, 
+    storage_capacity = ?, 
+    ram = ?
+    WHERE asset_id = ?");
 
   $stmt->bind_param(
-    "sissssssdisssssss",
-    $asset_type,
-    $asset_category,
-    $asset_make,
-    $serial_number,
-    $purchase_date,
-    $asset_warranty,
-    $asset_location,
-    $asset_user,
-    $asset_cost,
-    $asset_depreciation,
-    $asset_condition,
-    $asset_mac_address,
-    $asset_ip_address,
-    $asset_ram,
-    $asset_storage,
-    $asset_os,
-    $asset_id
+    "sssssssdisssssssi",
+    $asset_category,      // s 
+    $asset_type,          // s
+    $asset_make,          // s
+    $serial_number,       // s
+    $purchase_date,       // s
+    $asset_warranty,      // s
+    $asset_location,      // s
+    $asset_cost,          // d
+    $asset_depreciation,  // i
+    $asset_user,          // s
+    $asset_condition,     // s
+    $asset_mac_address,   // s
+    $asset_ip_address,    // s
+    $asset_os,            // s
+    $asset_storage,       // s
+    $asset_ram,           // s
+    $asset_id             // i
   );
 
   if ($stmt->execute()) {
