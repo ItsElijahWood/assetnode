@@ -17,8 +17,8 @@ class RenderListsAndFetchList
 
     if (!empty($data)) {
       foreach ($data as $row) {
-        if ($row['user_hardware'] === '') {
-          $row['user_hardware'] = '-';
+        if ($row['assigned_to'] === '') {
+          $row['assigned_to'] = '-';
         }
         if ($row['warranty_expiration_date'] === '') {
           $row['warranty_expiration_date'] = '-';
@@ -36,7 +36,7 @@ class RenderListsAndFetchList
               <input type='hidden' name='purchase_date' value='" . urlencode($row['purchase_date']) . "'>
               <input type='hidden' name='asset_warranty' value='" . urlencode($row['warranty_expiration_date']) . "'>
               <input type='hidden' name='asset_location' value='" . urlencode($row['location']) . "'>
-              <input type='hidden' name='asset_user' value='" . urlencode($row['user_hardware']) . "'>
+              <input type='hidden' name='asset_user' value='" . urlencode($row['assigned_to']) . "'>
               <input type='hidden' name='asset_depreciation' value='" . urlencode($row['depreciation']) . "'>
               <input type='hidden' name='asset_condition' value='" . urlencode($row['asset_condition']) . "'>
               <input type='hidden' name='asset_ip_address' value='" . urlencode($row['ip_address']) . "'>
@@ -69,7 +69,7 @@ class RenderListsAndFetchList
               <p class='list_column_p'>" . htmlspecialchars($row['cost']) . "</p>
             </div>
             <div class='list_column'>
-              <p class='list_column_p'>" . htmlspecialchars($row['user_hardware']) . "</p>
+              <p class='list_column_p'>" . htmlspecialchars($row['assigned_to']) . "</p>
             </div>
             <div class='list_column'>
               <p class='list_column_p'>" . htmlspecialchars($row['warranty_expiration_date']) . "</p>

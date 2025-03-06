@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
   $stmt = mysqli_prepare(
     $connAssets,
     "INSERT INTO `$db_string` (`type`, asset_id, asset_type, make, serial_number, 
-          purchase_date, warranty_expiration_date, `location`, user_hardware, cost, depreciation, 
+          purchase_date, warranty_expiration_date, `location`, assigned_to, cost, depreciation, 
           `asset_condition`, mac_address, ip_address, ram, storage_capacity, operating_system) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
   );

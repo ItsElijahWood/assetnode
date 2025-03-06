@@ -72,6 +72,16 @@ option {
   border-radius: 5px;
   padding: 10px;
 }
+.software-inputs-div {
+  display: none;
+  flex-wrap: wrap;
+  padding-left: 1rem;
+  padding-top: 2rem;
+  height: auto;
+  max-width: 100%;
+  gap: 30px;
+  padding-bottom: 30px;
+}
 .hardware-inputs-div {
   display: none;
   flex-wrap: wrap;
@@ -361,7 +371,6 @@ option {
 .list_hardware {
   display: grid;
   gap: 10px;
-  width: 100%;
   height: auto;
   background-color: white;
   padding: 10px;
@@ -374,7 +383,6 @@ option {
 .list_hardware_container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  width: 100%;
   background-color: white;
   align-items: center;
   text-align: center;

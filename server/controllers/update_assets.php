@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     location = ?, 
     cost = ?, 
     depreciation = ?, 
-    user_hardware = ?, 
+    assigned_to = ?, 
     asset_condition = ?, 
     mac_address = ?, 
     ip_address = ?, 

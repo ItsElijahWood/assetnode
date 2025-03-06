@@ -28,6 +28,17 @@ $asset_serial_number_get = null;
 $asset_purchase_date_get = null;
 $asset_location_get = null;
 $asset_condition_get = null;
+$asset_ram_get = null;
+$asset_storage_get = null;
+$asset_os_get = null;
+$asset_ip_address_get = null;
+$asset_depreciation_get = null;
+$asset_warranty_get = null;
+$asset_serial_number_get_trim = null;
+$asset_category_get_trim = null;
+$asset_user_get_trim = null;
+$asset_mac_address_get_trim = null;
+$asset_location_get_trim = null;
 if (
   isset($_GET['asset_id']) &&
   isset($_GET['asset_type']) &&
@@ -69,7 +80,7 @@ if (
   $asset_user_get_trim = preg_replace('/\+/', ' ', trim($asset_user_get));
   $asset_mac_address_get_trim = preg_replace('/%253A/', ':', urldecode(trim($asset_mac_address_get)));
   $asset_location_get_trim = preg_replace('/\+/', ' ', urldecode(trim($asset_location_get)));
-  
+
   echo '<style>.edit_view { display: block } body *:not(.edit_view):not(.edit_view *) { opacity: 0.8; user-select: none; } .edit_view, .edit_view * { user-select: auto; }</style>';
 }
 ?>
@@ -96,7 +107,7 @@ if (
     <?php require __DIR__ . "/../components/dashboard_header.php"; ?>
     <!-- Main content -->
     <div class="buttons">
-      <a class="a-new" onclick="$('.add').css('display', 'block'); $('*:not(.add, .add *, body, html)').css('opacity', '0.8'); document.querySelectorAll('body *').forEach(el => el.style.userSelect = 'none'); document.querySelectorAll('.add, .add *').forEach(el => el.style.userSelect = 'auto');">Add Assets</a>
+      <a class="a-new" onclick="$('.add').css('display', 'block'); $('*:not(.add, .add *, body, html)').css('opacity', '0.8'); document.querySelectorAll('body *').forEach(el => el.style.userSelect = 'none'); document.querySelectorAll('.add, .add *').forEach(el => el.style.userSelect = 'auto');">Add Asset</a>
     </div>
     <div class="list_hardware">
       <div class="list_header_hardware">
@@ -131,8 +142,8 @@ if (
         <a class="add-header-x" onclick="$('.add').css('display', 'none'); $('*:not(.add, .add *, body, html)').css('opacity', '1'); document.querySelectorAll('body *').forEach(el => el.style.userSelect = 'auto');">X</a>
       </div>
       <div class="type-selector">
-        <a onclick="selecter(this); $('.hardware-inputs-div').css('display', 'flex');" class="type-selector-a-1">IT Hardware</a>
-        <a onclick="selecter(this);" class="type-selector-a-2">IT Software</a>
+        <a onclick="selecter(this); $('.hardware-inputs-div').css('display', 'flex'); $('software-inputs-div').css('display', 'none');" class="type-selector-a-1">IT Hardware</a>
+        <a onclick="selecter(this); $('.software-inputs-div').css('display', 'flex'); $('.hardware-inputs-div').css('display', 'none');" class="type-selector-a-2">IT Software</a>
         <a onclick="selecter(this);" class="type-selector-a-3">FF&E</a>
         <a onclick="selecter(this);" class="type-selector-a-4">MEP</a>
       </div>
@@ -188,7 +199,127 @@ if (
           </select>
         </div>
         <div class="input-div">
-          <label id="asset-assigned-user" for="asset-assigned-user">Assigned User</label>
+          <label id="asset-assigned-user" for="asset-assigned-user">Assigned To</label>
+          <input id="asset_assigned-user-input" required>
+        </div>
+        <div class="input-div">
+          <label id="asset-cost" for="asset-cost">Cost*</label>
+          <div class="input-div-cost">
+            <p class="cost-p">£</p>
+            <input id="asset_cost-input" required>
+          </div>
+        </div>
+        <div class="input-div">
+          <label id="asset-depreciation" for="asset-depreciation">Annual Depreciation*</label>
+          <div class="input-div-depreciation">
+            <p class="depreciation-p">%</p>
+            <input id="asset_depreciation-input" min="1" max="100" type="number" required>
+          </div>
+        </div>
+        <div class="select-div">
+          <label id="asset-condition">Condition*</label>
+          <select id="AssetCondition" required>
+            <?php foreach ($resultAssetCondition as $condition): ?>
+              <?php if ($condition[0] == '')
+                continue; ?>
+              <option style="color: black;"><?= htmlspecialchars($condition[0]) ?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+        <div class="input-div">
+          <label id="asset-mac-address" for="asset-mac-address">Mac Address</label>
+          <input id="asset_mac_address-input" required>
+        </div>
+        <div class="input-div">
+          <label id="asset-ip-address" for="asset-ip-address">IP Address</label>
+          <input id="asset_ip_address-input" required>
+        </div>
+        <div class="select-div">
+          <label id="asset-ram">Ram</label>
+          <div class="select-div-ram">
+            <p class="ram-p">GB</p>
+            <select id="AssetRam" required>
+              <?php foreach ($resultAssetRam as $ram): ?>
+                <?php if ($ram[0] == '')
+                  continue; ?>
+                <option style="color: black;"><?= htmlspecialchars($ram[0]) ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
+        <div class="input-div">
+          <label id="asset-storage-capacity" for="asset-storage-capacity">Storage Capacity</label>
+          <div class="input-div-storage-capacity">
+            <p class="storage-capacity-p">MB</p>
+            <input id="asset_storage_capacity-input" min="1" max="100" type="number" required>
+          </div>
+        </div>
+        <div class="select-div">
+          <label id="asset-os">OS</label>
+          <select id="AssetOS" required>
+            <?php foreach ($resultAssetOS as $os): ?>
+              <?php if ($os[0] == '')
+                continue; ?>
+              <option style="color: black;"><?= htmlspecialchars($os[0]) ?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+        <a class="submit-hardware">Add Asset</a>
+        <p id="error-msg"></p>
+      </div>
+      <div id="software-inputs-id" class="software-inputs-div">
+        <div class="input-div">
+          <label id="asset-software" for="asset-software">Asset Category*</label>
+          <input value="IT Software" id="asset_software-input" readonly>
+        </div>
+        <div class="input-div">
+          <label id="asset-id" for="asset-id">Asset id*</label>
+          <input value="<?php echo htmlspecialchars($highestAssetId); ?>" id="asset_id-input" readonly>
+        </div>
+        <div class="select-div">
+          <label id="asset-type">Asset Type*</label>
+          <select id="AssetType" required>
+            <?php foreach ($resultAssetType as $type): ?>
+              <?php if ($type[0] == '')
+                continue; ?>
+              <option style="color: black;"><?= htmlspecialchars($type[0]) ?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+        <div class="select-div">
+          <label id="asset-make">Make*</label>
+          <select id="AssetMake" required>
+            <?php foreach ($resultAssetMake as $make): ?>
+              <?php if ($make[0] == '')
+                continue; ?>
+              <option style="color: black;"><?= htmlspecialchars($make[0]) ?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+        <div class="input-div">
+          <label id="asset-serial-number" for="asset-serial-number">Serial Number*</label>
+          <input id="asset_serial_number-input" required>
+        </div>
+        <div class="input-div">
+          <label id="asset-purchase-date" for="asset-purchase-date">Purchase Date*</label>
+          <input type="date" id="asset_purchase-date-input" required>
+        </div>
+        <div class="input-div">
+          <label id="asset-warranty-expiration-date" for="asset-warranty-expiration-date">Warranty Expiration</label>
+          <input type="date" id="asset_warranty-expiration-date-input" required>
+        </div>
+        <div class="select-div">
+          <label id="asset-location">Location</label>
+          <select id="AssetLocation" required>
+            <?php foreach ($resultAssetLocation as $location): ?>
+              <?php if ($location[0] == '')
+                continue; ?>
+              <option style="color: black;"><?= htmlspecialchars($location[0]) ?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+        <div class="input-div">
+          <label id="asset-assigned-user" for="asset-assigned-user">Assigned To</label>
           <input id="asset_assigned-user-input" required>
         </div>
         <div class="input-div">
@@ -261,21 +392,21 @@ if (
     <!-- Edit/View -->
     <div id="edit_view" style="display: <?php echo $asset_id_get !== null ? 'block' : 'none'; ?>;" class="edit_view" style="display: none">
       <div class="edit_view-header">
-        <p class="edit_view-title">Edit Assets</p>
-        <a class="edit_view-header-x" onclick="$('.edit_view').css('display', 'none'); $('*:not(.edit_view, .edit_view *, body, html)').css('opacity', '1'); document.querySelectorAll('body *').forEach(el => el.style.userSelect = 'auto');">X</a>
+        <p class="edit_view-title">Edit Asset</p>
+        <a class="edit_view-header-x" onclick="$('.edit_view').css('display', 'none'); $('*:not(.edit_view, .edit_view *, body, html)').css('opacity', '1'); document.querySelectorAll('body *').forEach(el => el.style.userSelect = 'auto'); window.location.href='<?= $config['WEBSITE_URL'] ?>/assets/list'">X</a>
       </div>
       <div id="edit_view-id" class="edit_view-div">
         <div class="input-div">
           <label id="asset-hardware" for="asset-hardware">Asset Category*</label>
-          <input value="<?= $asset_category_get_trim ?>" class="asset_hardware-input" id="asset_hardware-input" readonly>
+          <input value="<?= $asset_category_get_trim ?>" class="asset_hardware-input-edit" id="asset_hardware-input" readonly>
         </div>
         <div class="input-div">
           <label id="asset-id" for="asset-id">Asset id*</label>
-          <input value="<?= $asset_id_get ?>" class="asset_id-input" id="asset_id-input" readonly>
+          <input value="<?= $asset_id_get ?>" class="asset_id-input-edit" id="asset_id-input" readonly>
         </div>
         <div class="select-div">
           <label class="asset-type" id="asset-type">Asset Type*</label>
-          <select class="AssetType" id="AssetType" required>
+          <select class="AssetTypeEdit" id="AssetType" required>
             <option style="color: black;"><?= $asset_type_get ?></option>
             <?php foreach ($resultAssetType as $type): ?>
               <?php if ($type[0] == '')
@@ -286,7 +417,7 @@ if (
         </div>
         <div class="select-div">
           <label id="asset-make">Make*</label>
-          <select class="AssetMake" id="AssetMake" required>
+          <select class="AssetMakeEdit" id="AssetMake" required>
             <option style="color: black;"><?= $asset_make_get ?></option>
             <?php foreach ($resultAssetMake as $make): ?>
               <?php if ($make[0] == '')
@@ -297,19 +428,19 @@ if (
         </div>
         <div class="input-div">
           <label id="asset-serial-number" for="asset-serial-number">Serial Number*</label>
-          <input value="<?= $asset_serial_number_get_trim ?>" class="asset_serial_number-input" id="asset_serial_number-input" required>
+          <input value="<?= $asset_serial_number_get_trim ?>" class="asset_serial_number-input-edit" id="asset_serial_number-input" required>
         </div>
         <div class="input-div">
           <label id="asset-purchase-date" for="asset-purchase-date">Purchase Date*</label>
-          <input value="<?= $asset_purchase_date_get ?>" type="date" class="asset_purchase-date-input" id="asset_purchase-date-input" required>
+          <input value="<?= $asset_purchase_date_get ?>" type="date" class="asset_purchase-date-input-edit" id="asset_purchase-date-input" required>
         </div>
         <div class="input-div">
           <label id="asset-warranty-expiration-date" for="asset-warranty-expiration-date">Warranty Expiration</label>
-          <input value="<?= $asset_warranty_get ?>" type="date" class="asset_warranty-expiration-date-input" id="asset_warranty-expiration-date-input" required>
+          <input value="<?= $asset_warranty_get ?>" type="date" class="asset_warranty-expiration-date-input-edit" id="asset_warranty-expiration-date-input" required>
         </div>
         <div class="select-div">
           <label id="asset-location">Location</label>
-          <select class="AssetLocation"  id="AssetLocation" required>
+          <select class="AssetLocationEdit" id="AssetLocation" required>
             <option style="color: black;"><?= $asset_location_get_trim ?></option>
             <?php foreach ($resultAssetLocation as $location): ?>
               <?php if ($location[0] == '')
@@ -319,26 +450,26 @@ if (
           </select>
         </div>
         <div class="input-div">
-          <label id="asset-assigned-user" for="asset-assigned-user">Assigned User</label>
-          <input value="<?= $asset_user_get_trim ?>" class="asset_assigned-user-input"  id="asset_assigned-user-input" required>
+          <label id="asset-assigned-user" for="asset-assigned-user">Assigned To</label>
+          <input value="<?= $asset_user_get_trim ?>" class="asset_assigned-user-input-edit" id="asset_assigned-user-input" required>
         </div>
         <div class="input-div">
           <label id="asset-cost" for="asset-cost">Cost*</label>
           <div class="input-div-cost">
             <p class="cost-p">£</p>
-            <input value="<?= $asset_cost_get ?>" class="asset_cost-input"  id="asset_cost-input" required>
+            <input value="<?= $asset_cost_get ?>" class="asset_cost-input-edit" id="asset_cost-input" required>
           </div>
         </div>
         <div class="input-div">
           <label id="asset-depreciation" for="asset-depreciation">Annual Depreciation*</label>
           <div class="input-div-depreciation">
             <p class="depreciation-p">%</p>
-            <input value="<?= $asset_depreciation_get ?>" class="asset_depreciation-input"  id="asset_depreciation-input" min="1" max="100" type="number" required>
+            <input value="<?= $asset_depreciation_get ?>" class="asset_depreciation-input-edit" id="asset_depreciation-input" min="1" max="100" type="number" required>
           </div>
         </div>
         <div class="select-div">
           <label id="asset-condition">Condition*</label>
-          <select class="AssetCondition" id="AssetCondition" required>
+          <select class="AssetConditionEdit" id="AssetCondition" required>
             <option style="color: black;"><?= $asset_condition_get ?></option>
             <?php foreach ($resultAssetCondition as $condition): ?>
               <?php if ($condition[0] == '')
@@ -349,17 +480,17 @@ if (
         </div>
         <div class="input-div">
           <label id="asset-mac-address" for="asset-mac-address">Mac Address</label>
-          <input value="<?= $asset_mac_address_get_trim ?>" class="asset_mac_address-input" id="asset_mac_address-input" required>
+          <input value="<?= $asset_mac_address_get_trim ?>" class="asset_mac_address-input-edit" id="asset_mac_address-input" required>
         </div>
         <div class="input-div">
           <label id="asset-ip-address" for="asset-ip-address">IP Address</label>
-          <input value="<?= $asset_ip_address_get ?>" class="asset_ip_address-input" id="asset_ip_address-input" required>
+          <input value="<?= $asset_ip_address_get ?>" class="asset_ip_address-input-edit" id="asset_ip_address-input" required>
         </div>
         <div class="select-div">
           <label id="asset-ram">Ram</label>
           <div class="select-div-ram">
             <p class="ram-p">GB</p>
-            <select class="AssetRam" id="AssetRam" required>
+            <select class="AssetRamEdit" id="AssetRam" required>
               <option style="color: black;"><?= $asset_ram_get ?></option>
               <?php foreach ($resultAssetRam as $ram): ?>
                 <?php if ($ram[0] == '')
@@ -373,12 +504,12 @@ if (
           <label id="asset-storage-capacity" for="asset-storage-capacity">Storage Capacity</label>
           <div class="input-div-storage-capacity">
             <p class="storage-capacity-p">MB</p>
-            <input class="asset_storage_capacity-input" value="<?= $asset_storage_get ?>" id="asset_storage_capacity-input" min="1" max="100" type="number" required>
+            <input class="asset_storage_capacity-input-edit" value="<?= $asset_storage_get ?>" id="asset_storage_capacity-input" min="1" max="100" type="number" required>
           </div>
         </div>
         <div class="select-div">
           <label id="asset-os">OS</label>
-          <select class="AssetOS" id="AssetOS" required>
+          <select class="AssetOSEdit" id="AssetOS" required>
             <option style="color: black;"><?= $asset_os_get ?></option>
             <?php foreach ($resultAssetOS as $os): ?>
               <?php if ($os[0] == '')
@@ -388,7 +519,7 @@ if (
           </select>
         </div>
         <a class="save-hardware">Save Asset</a>
-        <p id="error-msg"></p>
+        <p class="error-msg" id="error-msg"></p>
       </div>
     </div>
     </div>
@@ -485,23 +616,23 @@ if (
     $(document).ready(function() {
       $('.save-hardware').click(function(event) {
         event.preventDefault();
-        const assetId = $('.asset_id-input').val();
-        const assetCategory = $('.asset_hardware-input').val();
-        const assetType = $('.AssetType').val();
-        const assetMake = $('.AssetMake').val();
-        const assetSerialNumber = $('.asset_serial_number-input').val();
-        const assetPurchaseDate = $('.asset_purchase-date-input').val();
-        const assetWarranty = $('.asset_warranty-expiration-date-input').val();
-        const assetLocation = $('.AssetLocation').val();
-        const assetUser = $('.asset_assigned-user-input').val();
-        const assetCost = $('.asset_cost-input').val();
-        const assetDepreciation = $('.asset_depreciation-input').val();
-        const assetCondition = $('.AssetCondition').val();
-        const assetMacAddress = $('.asset_mac_address-input').val();
-        const assetIpAddress = $('.asset_ip_address-input').val();
-        const assetRam = $('.AssetRam').val();
-        const assetStorage = $('.asset_storage_capacity-input').val();
-        const assetOs = $('.AssetOS').val();
+        const assetId = $('.asset_id-input-edit').val();
+        const assetCategory = $('.asset_hardware-input-edit').val();
+        const assetType = $('.AssetTypeEdit').val();
+        const assetMake = $('.AssetMakeEdit').val();
+        const assetSerialNumber = $('.asset_serial_number-input-edit').val();
+        const assetPurchaseDate = $('.asset_purchase-date-input-edit').val();
+        const assetWarranty = $('.asset_warranty-expiration-date-input-edit').val();
+        const assetLocation = $('.AssetLocationEdit').val();
+        const assetUser = $('.asset_assigned-user-input-edit').val();
+        const assetCost = $('.asset_cost-input-edit').val();
+        const assetDepreciation = $('.asset_depreciation-input-edit').val();
+        const assetCondition = $('.AssetConditionEdit').val();
+        const assetMacAddress = $('.asset_mac_address-input-edit').val();
+        const assetIpAddress = $('.asset_ip_address-input-edit').val();
+        const assetRam = $('.AssetRamEdit').val();
+        const assetStorage = $('.asset_storage_capacity-input-edit').val();
+        const assetOs = $('.AssetOSEdit').val();
 
         $.ajax({
           url: '../server/controllers/update_assets.php',
@@ -526,14 +657,10 @@ if (
             asset_os: assetOs
           },
           success: function(response) {
-            if (response.success) {
-              $('#error-msg').html(response.message);
-            } else {
-              $('#error-msg').html(response.message);
-            }
+            window.location.href = window.location.pathname;
           },
           error: function(response) {
-            $('#error-msg').html(response.message);
+            $('.error-msg').html(response.message);
           },
         });
       })

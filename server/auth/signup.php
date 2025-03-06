@@ -23,7 +23,7 @@ class Signup
 
     $stmt = mysqli_prepare($this->conn, "SELECT * FROM accounts WHERE email = ?");
 
-    mysqli_stmt_bind_param($stmt, "s", $email);
+    $stmt->bind_param("s", $email);
 
     if (!mysqli_stmt_execute($stmt)) {
       return ["success" => false, "message" => "Error executing database query."];
@@ -37,23 +37,30 @@ class Signup
             CREATE TABLE IF NOT EXISTS `$uid_string` (     
                 type VARCHAR(200) NOT NULL,
                 asset_id INT NOT NULL,
-                asset_type VARCHAR(200) NOT NULL,
-                make VARCHAR(200) NOT NULL,
-                serial_number VARCHAR(200) NOT NULL,
-                purchase_date VARCHAR(200) NOT NULL,
-                warranty_expiration_date VARCHAR(200) NOT NULL,
-                location VARCHAR(200) NOT NULL,
-                cost DOUBLE(10,2) NOT NULL,
-                depreciation INT NOT NULL,
-                user_hardware VARCHAR(200) NOT NULL,
-                asset_condition VARCHAR(200) NOT NULL,
+                asset_type VARCHAR(200) NULL,
+                make VARCHAR(200) NULL,
+                serial_number VARCHAR(200) NULL,
+                purchase_date VARCHAR(200) NULL,
+                warranty_expiration_date VARCHAR(200) NULL,
+                location VARCHAR(200) NULL,
+                cost DOUBLE(10,2) NULL,
+                depreciation INT NULL,
+                assigned_to VARCHAR(200) NULL,
+                asset_condition VARCHAR(200) NULL,
                 mac_address VARCHAR(200) NULL,
                 ip_address VARCHAR(200) NULL,
                 operating_system VARCHAR(200) NULL,
                 storage_capacity VARCHAR(200) NULL,
-                ram VARCHAR(200) NULL
-            );
-        ";
+                ram VARCHAR(200) NULL,
+                software_name VARCHAR(200)  NULL,
+                software_vendor VARCHAR(200) NULL,
+                software_license VARCHAR(200) NULL,
+                software_license_expired_date VARCHAR(200) NULL,
+                software_renew_license VARCHAR(200) NULL,
+                software_version VARCHAR(200) NULL,
+                software_installation VARCHAR(200) NULL,
+                software_install_location VARCHAR(200) NULL
+            );";
 
     if (!mysqli_query($this->connAssets, $sql)) {
       return ["success" => false, "message" => "Failed to execute database query"];
